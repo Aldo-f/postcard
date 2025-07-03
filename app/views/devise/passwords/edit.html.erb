@@ -1,0 +1,27 @@
+<% content_for :heading do %>Change your password<% end %>
+<% title 'Change your password' %>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <div class="form-space">
+    <%= render 'shared/form_error_messages', object: f.object %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div class="field">
+      <div class="flex items-center justify-between">
+      <%= f.label :password, "New password", class: 'form-label' %>
+
+        <% if @minimum_password_length %>
+          <div class="form-description">
+            At least <%= @minimum_password_length %> characters
+          </div>
+        <% end %>
+      </div>
+
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-input' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Change password →", class: "btn btn-primary w-full" %>
+    </div>
+  </div>
+<% end %>

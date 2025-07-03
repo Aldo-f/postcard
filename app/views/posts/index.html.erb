@@ -1,0 +1,31 @@
+<div class="flex items-center justify-between">
+  <div class="flex-grow">
+    <h1 class="dashboard-title">
+      Posts
+    </h1>
+    <div class="block mt-2 text-sm text-gray-500">
+      Publish an email to your mailing list of subscribers.
+    </div>
+  </div>
+  <%= link_to "New post",
+    page_posts_path(@account),
+    class: "btn btn-primary shrink-0",
+    data: { turbo_method: :post }
+    %>
+</div>
+
+<div class="pt-6">
+  <% if @posts.count.zero? %>
+    <div class="mt-8 text-sm prose text-gray-600 max-w-none">
+      <p>
+        You haven't drafted a post yet. Try creating one!
+      </p>
+    </div>
+  <% else %>
+    <%= render :partial => "posts/table", locals: { posts: @posts, account: @account } %>
+  <% end %>
+</div>
+
+<% if @share_post %>
+  <%= render "share_post_modal", post: @share_post %>
+<% end %>

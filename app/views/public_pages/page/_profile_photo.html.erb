@@ -1,0 +1,26 @@
+<div class="flex items-center justify-between public-page-container">
+  <div class="-mt-16">
+    <a class="flex" href="/">
+      <% if account.photo.attached? %>
+        <%= render "shared/square_picture_variants", picture: account.photo, size: 144, classes: "h-32 w-32 rounded-full ring-4 ring-white sm:h-36 sm:w-36 bg-white", alt: account.name %>
+      <% else %>
+        <span class="inline-block w-32 h-32 overflow-hidden rounded-full bg-gray-075 ring-4 ring-white sm:h-36 sm:w-36">
+          <svg class="w-full h-full text-gray-200" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </span>
+      <% end %>
+    </a>
+  </div>
+  <div>
+    <% unless current_page?(public_posts_path) %>
+      <% if account.posts.published.publicly_listed.count == 1 %>
+        <% if current_page?(:controller => 'public_pages', :action => 'show') %>
+          <%= link_to "Read newest post →", public_post_url(account.posts.published.first, domain: account.host, protocol: request.protocol), class: "text-accent-if-contrast hover:underline" %>
+        <% end %>
+      <% elsif account.posts.published.publicly_listed.any? %>
+        <%= link_to "Recent posts →", public_posts_url(domain: account.host, protocol: request.protocol), class: "text-accent-if-contrast hover:underline" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+name: Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    services:
+      postgres:
+        image: postgres:10
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --entrypoint redis-server
+    env:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_TEST_KEY }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+          bundler-cache: true
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.12.1
+      - name: Install libvips
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          # we only need the library
+          sudo apt-get update
+          sudo apt-get install --fix-missing -qq -o Acquire::Retries=3 libvips libvips-tools
+      - name: Setup the Rails application
+        env:
+          RAILS_ENV: test
+        run: |
+          sudo apt-get -yqq install libpq-dev
+          bundle install --no-deployment --jobs 4 --retry 3
+          cp config/database.github.yml config/database.yml
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+          yarn --frozen-lockfile
+          bundle exec rake assets:precompile
+      - name: Run unit tests (SOLO)
+        run: bundle exec rails test:all
+      - name: Run unit tests (MULTIUSER)
+        env:
+          APP_MODE: MULTIUSER
+        run: bundle exec rails test:all
+      - name: Run brakeman
+        run: bundle exec brakeman

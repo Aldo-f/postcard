@@ -1,0 +1,51 @@
+<% title 'New domain' %>
+
+<% content_for :heading do %>
+  Find a new domain
+<% end %>
+<% content_for :subheading do %>
+  Postcard partners with Google Domains to offer you a simple way to buy a new domain.
+<% end %>
+<% content_for :head do %>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script type="text/javascript">
+    function showGoogleDomainsFlow() {
+      gapi.load('domains', function() {
+          gapi.domains.searchAndBuy(
+          {
+              partnerId: 3768,
+              successUrl: "<%= page_setup_url(@account, :domain_purchase) %>?domain=%domain%",
+              cancelUrl: "<%= page_setup_url(@account, :domain_purchase) %>",
+              defaultQuery: "<%= @account.name %>",
+              template: {
+                templateId: "postcard",
+                vars: {
+                  'postcardapex': '216.24.57.1',
+                  'postcardhost': '<%= "#{@account.slug}.#{Rails.configuration.base_host}" %>'
+                }
+              }
+          });
+      });
+    }
+  </script>
+<% end %>
+
+<% title 'Purchase a new domain' %>
+
+<div class="prose">
+  <ol>
+    <li>Find and buy the domain you want to buy through Google Domains</li>
+    <li>Google will automatically connect your domain to Postcard</li>
+    <li>Manage your domain and set up email in the future on Google Domains</li>
+  </ol>
+</div>
+
+<button class="btn btn-primary w-full" onclick="showGoogleDomainsFlow()">
+  Find a domain →
+</button>
+
+<p class="text-gray-700 text-center text-sm">
+  <div class="text-center">
+    <%= link_to "I'll do this later", wizard_path(:domain_hosted), class: 'link' %>
+  </div>
+</p>

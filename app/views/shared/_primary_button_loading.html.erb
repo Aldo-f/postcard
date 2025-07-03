@@ -1,0 +1,33 @@
+<%
+disabled = defined?(:disabled) ? disabled : false
+%>
+
+<button
+  name="button"
+  type="submit"
+  class="btn btn-primary <% if defined?(classes)%><%= classes %><% end %>"
+  <% if defined?(:disabled) && disabled %>
+      disabled="<%= disabled %>"
+  <% else %>
+    data-controller="loading"
+    data-loading-target="button"
+    data-action="turbo:submit-start@document->loading#displayLoading"\
+  <% end %>
+  <% if defined?(turbo_method) %>
+    data-turbo-method="<%= turbo_method %>"
+  <% end %>
+
+  <%# https://stackoverflow.com/questions/7020659/submit-form-using-a-button-outside-the-form-tag %>
+  <% if defined?(form) && form %>
+    form="<%= form %>"
+  <% end %>
+  >
+    <%= label %>
+
+    <%# Arrow %>
+    <% if defined?(arrow) && arrow %>
+      <%= render :partial => "shared/button_loading_arrow" %>
+    <% end %>
+
+    <%= render :partial => "shared/button_loading_spinner" %>
+</button>

@@ -1,0 +1,29 @@
+<% content_for :summary do %>
+  What happens when somebody googles your name?
+<% end %>
+
+<p>
+  A personal website gives superpowers on the internet. Here are three of them:
+</p>
+
+<ol>
+  <li>
+    <strong>Own your search results on Google:</strong> What happens when clients, recruiters, or friends search your name online? Postcard automatically submits your posts to Google so that your personal website shows up in search results.
+  </li>
+  <li>
+    <strong>A forever profile:</strong> Social networks come and go. But, a personal website is a profile that you can always point people to. When you buy a custom domain, you can use it for your personal website forever - even if you switch web hosts.
+  </li>
+  <li>
+    <strong>Stay connected on your own terms</strong>: An email mailing list is a direct connection to an audience that you can maintain forever. Postcard combines a mailing list with public posts that you can share posts on social networks.
+  </li>
+</ol>
+<% content_for :button_label do %>
+  <% if @account.active_subscription? %>
+    Write a post
+  <% else %>
+    Get started
+  <% end %>
+<% end %>
+
+<% content_for :button_link do %><% if @account.active_subscription? %><%= page_posts_url(@account) %><% else %><%= page_url(@account) %><% end %><% end %>
+

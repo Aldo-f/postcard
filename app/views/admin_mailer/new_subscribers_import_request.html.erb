@@ -1,0 +1,14 @@
+
+<% content_for :button_label do %>
+  Review
+<% end %>
+
+<% content_for :button_link do %><%= page_subscribers_imports_url(@subscribers_import.account) %><% end %>
+
+<p>
+  <%= @subscribers_import.account.name %> is requesting to import <%= @subscribers_import.emails.count %> subscribers to their Postcard:
+</p>
+
+<p>
+  <pre><%= @subscribers_import.sources_description %></pre>
+</p>

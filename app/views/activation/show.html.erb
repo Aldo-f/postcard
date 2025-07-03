@@ -1,0 +1,28 @@
+<% content_for :heading do %>Activate your account<% end %>
+<% content_for :subheading do %>
+  Set your password, then you can connect a custom domain.
+<% end %>
+
+<% title 'Activate Postcard' %>
+
+<%= form_with(model: @account, url: request.path, method: :put, local: true) do |f| %>
+  <div class="form-space">
+    <%= render 'shared/form_error_messages', object: f.object %>
+    <div class="field">
+      <%= f.label :email, class: 'form-label' %>
+      <%= f.text_field :email, autofocus: false, autocomplete: "off", class: 'form-input bg-gray-200', disabled: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, class: 'form-label' %>
+      <%= f.password_field :email, autofocus: true, autocomplete: "off", class: 'form-input' %>
+    </div>
+
+    <div class="actions">
+      <%= render :partial => "shared/primary_button_loading", locals: { label: 'Activate', classes: " w-full", arrow: true } %>
+    </div>
+  </div>
+  <p class="mt-2 text-sm text-center text-gray-600">
+    By signing up, you agree to the <a href="https://www.contraption.co/policies" class="underline" target="_blank">terms and privacy policy</a>.
+  <p>
+<% end %>

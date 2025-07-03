@@ -1,0 +1,14 @@
+<% if @account.pinned_post%>
+  <%= turbo_stream.prepend "flash_messages" do %>
+    <%= render :partial => "layouts/flash", locals: { message: 'Post featured on your homepage' } %>
+  <% end %>
+  <%= turbo_stream.replace "row_#{@account.pinned_post_id}", partial: "posts/table_row", locals: { post: @account.pinned_post, account: @account } %>
+<% else %>
+  <%= turbo_stream.prepend "flash_messages" do %>
+    <%= render :partial => "layouts/flash", locals: { message: 'Removed as featured post from your homepage' } %>
+  <% end %>
+<% end %>
+
+<% if @old_pinned_post %>
+  <%= turbo_stream.replace "row_#{@old_pinned_post.id}", partial: "posts/table_row", locals: { post: @old_pinned_post, account: @account } %>
+<% end %>

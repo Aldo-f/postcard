@@ -1,0 +1,11 @@
+<% content_for :summary do %>
+  Somebody just joined your mailing list on <%= @account.name %>
+<% end %>
+
+<p>
+  You have a new subscriber to <a href="https://<%= @subscription.account.host %>"><%= @subscription.account.host %></a>:
+</p>
+
+<p>
+    Email: <a href="mailto:<%= @subscription.email_address.email %>"> <%= @subscription.email_address.email %></a>
+</p>

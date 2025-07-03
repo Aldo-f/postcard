@@ -1,0 +1,34 @@
+<aside class="bg-accent"
+  data-controller="notification"
+  data-notification-delay-value="9999999">
+
+  <div class="py-3 dashboard-container">
+    <div class="pr-16 sm:px-16 sm:text-center">
+      <p class="font-medium text-white">
+        <span class="md:hidden"><%= label_short %></span>
+        <span class="hidden md:inline"><%= label_long %></span>
+        <span class="block sm:ml-2 sm:inline-block">
+          <a href="<%= button_url %>" class="btn btn-secondary btn-small"
+            <% if new_page %>
+              target="_blank"
+              rel="noopener noreferrer"
+            <% end %>
+            >
+            <%= button_label %>
+            <span aria-hidden="true"> &rarr;</span>
+          </a>
+        </span>
+      </p>
+    </div>
+    <div class="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:items-start sm:pt-1 sm:pr-2">
+      <button
+        type="button"
+        class="flex p-2 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-white"
+        data-action="notification#hide"
+        >
+        <span class="sr-only">Dismiss</span>
+        <%= heroicon "x-mark", class: "w-6 h-6 text-white" %>
+      </button>
+    </div>
+  </div>
+</aside>

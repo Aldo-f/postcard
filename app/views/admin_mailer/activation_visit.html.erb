@@ -1,0 +1,11 @@
+<% content_for :summary do %>
+  <%= @account.name %> just visited the checkout link
+<% end %>
+
+<% content_for :button_label do %><%= @account.host %><% end %>
+
+<% content_for :button_link do %><%= @account.url %><% end %>
+
+<p>
+  <%= @account.name %> just visited the activation link for their account (<%= @account.email %>)
+</p>

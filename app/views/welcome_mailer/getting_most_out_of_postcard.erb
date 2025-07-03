@@ -1,0 +1,25 @@
+<% content_for :summary do %>
+  3 tips to get the most out of your new personal website
+<% end %>
+
+<p>
+  Your Postcard website enables you to have a profile that you own on the internet. Once you’ve added a photo and bio to your page, here’s what you should do next:
+</p>
+<ol>
+  <li>
+    <strong>Set up a personal domain</strong>: Custom domains bring professionalism to a personal website. Look for a domain with your name, and choose an ending like .com, .me, or .page. <% unless @account.active_subscription? %><a href="<%= page_setup_url(@account, :domain_configure) %>">Add a custom domain to your Postcard →</a><% end %>
+  </li>
+  <li>
+    <strong>Link to your homepage from your social sites</strong>: Help people find your site! Set your bio link to your Postcard on Twitter and Instagram, and <a href="https://www.linkedin.com/help/linkedin/answer/a548010/add-a-website-to-your-profile?lang=en">add the website to your LinkedIn profile</a>.
+  </li>
+  <li>
+    <strong>Write once, share everywhere</strong>: When you have something to say, write it on Postcard as a post. Then, share the post on your social networks. By keeping the post on your personal website, you can own the content long-term - but still share it with your connections on social networks. Plus, Postcard adds preview images that make your posts look polished on social sites.
+  </li>
+</ol>
+<p>
+  For inspiration, check out the Postcard Gallery to see other websites.
+</p>
+
+<% content_for :button_label do %>View Postcard gallery<% end %>
+
+<% content_for :button_link do %><%= page_showcase_index_url(@account) %><% end %>

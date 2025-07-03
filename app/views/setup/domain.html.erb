@@ -1,0 +1,29 @@
+<% title 'Domain' %>
+
+<% content_for :heading do %>
+  Do you already own a domain?
+<% end %>
+
+<% content_for :subheading do %>
+  <% if not @account.active_subscription? %>
+    Upgrade to host your Postcard on a custom domain
+  <% end %>
+<% end %>
+
+<div
+  <% unless @account.active_subscription? %>
+    data-controller="upgrade"
+  <% end %>
+>
+  <div class="space-y-4">
+    <%= link_to 'Yes, I have a domain', wizard_path(:domain_connect), class: 'btn btn-primary w-full', data: (@account.active_subscription? ? nil : {'turbo': false, action: 'click->upgrade#open'}) %>
+
+    <%= link_to 'No, find a new domain', wizard_path(:domain_purchase), class: 'btn btn-secondary w-full', data: (@account.active_subscription? ? nil : {'turbo': false, action: 'click->upgrade#open'}) %>
+
+    <div class="text-center">
+      <%= link_to "I'll do this later", wizard_path(:domain_hosted), class: 'link' %>
+    </div>
+  </div>
+  <%= render 'shared/upgrade_modal' %>
+</div>
+

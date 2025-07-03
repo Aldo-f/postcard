@@ -1,0 +1,200 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "20063e0b11dba8e41a5777cc27f5059d7d3ef4b0d07eded3bba85b575ff2ab50",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/billing_controller.rb",
+      "line": 12,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Account.friendly.find(params[:page_slug]).payment_processor.billing_portal(:return_url => page_url(Account.friendly.find(params[:page_slug]))).url, :status => :found, :allow_other_host => true)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "BillingController",
+        "method": "show"
+      },
+      "user_input": "Account.friendly.find(params[:page_slug]).payment_processor.billing_portal(:return_url => page_url(Account.friendly.find(params[:page_slug]))).url",
+      "confidence": "Weak",
+      "cwe_id": [
+        601
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "20b9e2e22a457c4ae028c4e78ab1a0dc443d3db25503474f89522baf53e6ca33",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/public_posts/index.html.erb",
+      "line": 3,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Account.first.code",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "PublicPostsController",
+          "method": "index",
+          "line": 16,
+          "file": "app/controllers/public_posts_controller.rb",
+          "rendered": {
+            "name": "public_posts/index",
+            "file": "app/views/public_posts/index.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "public_posts/index"
+      },
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "7091306dd0b02a1c02eaadd5138fef97feb5c99ac385b19973467ed117fc84e9",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/checkout_controller.rb",
+      "line": 10,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Account.friendly.find(params[:page_slug]).checkout_url(page_setup_url(Account.friendly.find(params[:page_slug]), :domain), page_url(Account.friendly.find(params[:page_slug]))), :status => :found, :allow_other_host => true)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "CheckoutController",
+        "method": "show"
+      },
+      "user_input": "Account.friendly.find(params[:page_slug]).checkout_url(page_setup_url(Account.friendly.find(params[:page_slug]), :domain), page_url(Account.friendly.find(params[:page_slug])))",
+      "confidence": "Weak",
+      "cwe_id": [
+        601
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "75513984ff60c58fa7a2730f96f8e9ea901688274fe705f793cfedd2f01c84fb",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/controllers/marketing_pages_controller.rb",
+      "line": 61,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => \"marketing_pages/alternative/#{params[:slug]}\", {})",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "MarketingPagesController",
+        "method": "alternative"
+      },
+      "user_input": "params[:slug]",
+      "confidence": "Medium",
+      "cwe_id": [
+        22
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "7ce1177264a58e67613bd9ddbf76c8248b1f4fbd4680b84c3fac22c4651a1859",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/setup_controller.rb",
+      "line": 15,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Account.friendly.find(params[:page_slug]).checkout_url(page_setup_url(Account.friendly.find(params[:page_slug]), step), page_setup_url(Account.friendly.find(params[:page_slug]), :domain)), :status => :found, :allow_other_host => true)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SetupController",
+        "method": "show"
+      },
+      "user_input": "Account.friendly.find(params[:page_slug]).checkout_url(page_setup_url(Account.friendly.find(params[:page_slug]), step), page_setup_url(Account.friendly.find(params[:page_slug]), :domain))",
+      "confidence": "Weak",
+      "cwe_id": [
+        601
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "a0dc0b7ff80b0cb403db0ed4689338f32f2eb26d1e8e9633417d3cc2fe2b446b",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/public_posts/show.html.erb",
+      "line": 3,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Account.first.code",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "PublicPostsController",
+          "method": "show",
+          "line": 23,
+          "file": "app/controllers/public_posts_controller.rb",
+          "rendered": {
+            "name": "public_posts/show",
+            "file": "app/views/public_posts/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "public_posts/show"
+      },
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "cd2f3a123e8268c7688d563323502822f5aecc107956f5787d98481d47d53f52",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/public_pages/show.html.erb",
+      "line": 3,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Account.first.code",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "MarketingPagesController",
+          "method": "homepage",
+          "line": 41,
+          "file": "app/controllers/marketing_pages_controller.rb",
+          "rendered": {
+            "name": "public_pages/show",
+            "file": "app/views/public_pages/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "public_pages/show"
+      },
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    }
+  ],
+  "updated": "2025-05-20 21:19:36 -0700",
+  "brakeman_version": "5.4.1"
+}

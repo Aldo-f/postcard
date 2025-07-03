@@ -1,0 +1,50 @@
+<div data-controller="dropdown" class="relative">
+  <button
+    type="button"
+    class="flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-200"
+    id="post-menu-button-<%= post.id %>"
+    aria-expanded="false" aria-haspopup="true"
+    data-action="dropdown#toggle click@window->dropdown#hide"
+    role="button"
+    data-dropdown-target="button">
+    <span class="sr-only">Open post menu</span>
+    <%= heroicon "ellipsis-vertical", class: "h-5 w-5 text-gray-700" %>
+  </button>
+
+  <div
+    data-dropdown-target="menu"
+    data-transition-enter-from="opacity-0 scale-95"
+    data-transition-enter-to="opacity-100 scale-100"
+    data-transition-leave-from="opacity-100 scale-100"
+    data-transition-leave-to="opacity-0 scale-95"
+    class="absolute right-0 hidden transition duration-200 ease-in-out origin-top-right transform dropdown-menu focus:outline-none"
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="post-menu-button-<%= post.id %>"
+    tabindex="-1">
+
+
+
+    <% if post.published? %>
+      <% if account.pinned_post_id == post.id %>
+        <%= form_with(model: account, url: page_account_path(account), method: :put, local: true,  class: 'dropdown-menu-item', role: 'menuitem') do |f| %>
+          <%= f.hidden_field :pinned_post_id, value: nil %>
+          <%= f.submit "Remove feature", class: 'w-full text-left cursor-pointer' %>
+        <% end %>
+      <% end %>
+      <%= link_to "View", public_post_url(post, domain: account.host, protocol: request.protocol), class: 'dropdown-menu-item', role: 'menuitem', target: "_blank", rel: "noopener" %>
+      <%= link_to "Share", page_posts_path(account, share_post: post.slug), class: 'dropdown-menu-item', role: 'menuitem' %>
+    <% end %>
+    <%= link_to "Edit", edit_page_post_path(account, post), class: 'dropdown-menu-item', role: 'menuitem' %>
+    <% if post.published? %>
+      <% if account.pinned_post_id != post.id && !post.visibility_hidden? %>
+        <%= form_with(model: account, url: page_account_path(account), method: :put, local: true,  class: 'dropdown-menu-item', role: 'menuitem') do |f| %>
+          <%= f.hidden_field :pinned_post_id, value: post.id %>
+          <%= f.submit "Feature", class: 'w-full text-left cursor-pointer', role: 'menuitem' %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= link_to "Delete", page_post_path(account, post), data: { 'turbo-confirm': "Are you sure you want to delete this post?", 'turbo-method': :delete },  class: 'dropdown-menu-item', role: 'menuitem' %>
+  </div>
+</div>

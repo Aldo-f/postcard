@@ -1,0 +1,5 @@
+<% content_for :summary do %>
+  <%= @post.body.to_plain_text.sub /\s*\[.+\]$/, '' %>
+<% end %>
+
+<%= @post.body %>

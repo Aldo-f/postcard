@@ -1,0 +1,11 @@
+<% content_for :summary do %>
+  <%= @account.name %> just joined Postcard
+<% end %>
+
+<% content_for :button_label do %><%= @account.host %><% end %>
+
+<% content_for :button_link do %><%= @account.url %><% end %>
+
+<p>
+  <%= @account.name %> just made a new account on Postcard:
+</p>

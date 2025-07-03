@@ -1,0 +1,9 @@
+<% content_for :button_label do %>
+  View import
+<% end %>
+
+<% content_for :button_link do %><%= page_subscribers_imports_url(@subscribers_import.account) %><% end %>
+
+<p>
+  Your import is approved and <%= @subscribers_import.emails.count %> emails have been imported to your account.
+</p>

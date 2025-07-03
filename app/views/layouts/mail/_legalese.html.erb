@@ -1,0 +1,21 @@
+<% if @unsubscribe_token.present? %>
+  <p class="mb-24">
+    Don't want emails any more from <%= @account.name %>?
+    <%= link_to "Unsubscribe", unsubscription_url(@unsubscribe_token, host: @account.host), class: "underline text-gray-900 font-medium" %>.
+  </p>
+
+  <a href="https://postcard.page" class="block no-underline text-gray-600 mb-24">
+    <div>Published with</div>
+    <%= image_tag 'logo/email-logo.png', height: 20, alt: 'Postcard', class: "inline-block mt-1" %>
+  </a>
+<% end %>
+
+<p class="text-gray-500"><a class="no-underline text-gray-500" href="https://postcard.page">Postcard</a> is © <%= Time.zone.now.year %> <a href="https://contraption.co/" class="no-underline text-gray-500">Contraption Co. LLC.</a> <a href="https://contraption.co/policies" class="no-underline text-gray-500">Privacy</a>.</p>
+<p class="text-gray-500">169 Madison Ave #2174 New York, NY 10016</p>
+
+<%# Used by welcome mailer for mailkick unsubscribe links %>
+<% if @unsubscribe_url.present? %>
+  <p class="text-gray-500">
+    <%= link_to "Unsubscribe", @unsubscribe_url, class: "underline text-gray-900 font-medium" %>.
+  </p>
+<% end %>

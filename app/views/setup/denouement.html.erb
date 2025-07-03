@@ -1,0 +1,21 @@
+<% title 'Share' %>
+
+<% content_for :heading do %>
+  <% if @account.unverified_domain? %>
+    Domain deploying
+  <% else %>
+    Share your new site:
+  <% end %>
+<% end %>
+
+<% if @account.unverified_domain? %>
+  <div class="prose">
+    <p>We'll email you when your domain is live. This typically takes about twenty minutes, but occassionally takes longer.</p>
+    <p>If you have any questions or problems, <% if Rails.configuration.solo_mode %><a href="https://github.com/contraptionco/postcard/issues/new" target="_blank">report an issue</a><% else %><a href="mailto:postcard@contraption.co">email us</a><% end %> and we'll review your settings!</p>
+  </div>
+<% else %>
+  <%= render "shared/share", url: @account.url, subject: "Check out my new personal website" %>
+<% end %>
+
+
+<%= link_to 'Done →', page_path(@account), class: 'btn btn-primary w-full' %>

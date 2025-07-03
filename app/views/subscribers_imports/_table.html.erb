@@ -1,0 +1,73 @@
+<div class="flex flex-col">
+  <div class="pt-8 pb-24 -mx-4 overflow-visible overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+      <table class="min-w-full divide-y divide-gray-300">
+        <thead>
+          <tr>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-950 sm:pl-6 md:pl-0">File</th>
+            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-950">Date</th>
+            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-950">Status</th>
+            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-950">Emails</th>
+            <% if current_account.admin? %>
+              <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-950"><span class="sr-only">Options</span></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <% imports.each do |import| %>
+            <tr>
+              <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-950 whitespace-nowrap sm:pl-6 md:pl-0">
+                <%= link_to import.file.filename, import.file, class: "link" %>
+              </td>
+              <td class="px-3 py-4 text-sm text-gray-950 whitespace-nowrap">
+                <%= local_time(import.created_at, '%B %e, %Y') %>
+              </td>
+              <td class="px-3 py-4 text-sm text-gray-950 whitespace-nowrap">
+                <% if import.approved? %>
+                  <span class="badge">
+                    Imported
+                  </span>
+                <% elsif import.approved.nil? %>
+                  <span class="badge-secondary">
+                    Pending
+                  </span>
+                <% else %>
+                  <span class="badge-secondary-gray">
+                    Rejected
+                  </span>
+                <% end %>
+              </td>
+              <td class="px-3 py-4 text-sm text-gray-950 whitespace-nowrap">
+                <% unless import.approved? %>
+                  <%= import.emails.count %> detected
+                <% else %>
+                  <%= import.subscriptions.count %> imported
+                <% end %>
+              </td>
+              <% if current_account.admin? %>
+                <td class="px-3 py-4 text-sm text-gray-950 whitespace-nowrap">
+                  <% if import.approved.nil? %>
+                  <div class="flex space-x-3 btn-group">
+                    <%= form_tag  page_subscribers_import_path(import.account, import), method: :put, local: true do -%>
+                      <%= hidden_field_tag :approved, true -%>
+                      <%= submit_tag 'Approve', class: 'btn btn-primary'  -%>
+                    <%- end -%>
+                    <%= form_tag  page_subscribers_import_path(import.account, import), method: :put, local: true do -%>
+                      <%= hidden_field_tag :approved, false -%>
+                      <%= submit_tag 'Reject', class: 'btn btn-secondary'  -%>
+                    <%- end -%>
+                  </div>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+

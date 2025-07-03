@@ -1,0 +1,12 @@
+<%= render "nav" %>
+<div class="pb-24 space-y-24 lg:space-y-36 lg:pb-36">
+  <%= render "hero" %>
+  <%= render "gallery", accounts: @primary_showcase_accounts %>
+  <%= render "how_it_works" %>
+  <%= render "gallery", accounts: @secondary_showcase_accounts %>
+  <%= render 'features' %>
+  <%= render "gallery", accounts: @tertiary_showcase_accounts %>
+  <%= render 'pricing' %>
+  <%= render 'cta' %>
+</div>
+<%= render 'footer' %>

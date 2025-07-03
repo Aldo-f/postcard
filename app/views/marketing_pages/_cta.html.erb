@@ -1,0 +1,19 @@
+<div class="dashboard-container">
+  <div class="items-center overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4 lg:flex">
+    <div class="py-12 lg:py-16 lg:pr-0 xl:py-20">
+      <div class="text-center lg:self-center lg:text-left">
+        <span class="homepage-label">Join now</span>
+        <h2 class="mt-2 text-3xl font-bold text-gray-950 sm:text-4xl">
+          <span class="block">Ready to set up your website?</span>
+        </h2>
+        <p class="mt-4 text-lg leading-6 text-gray-925">Have your page published in minutes.</p>
+        <a href="<%= new_registration_path('account') %>" class="mt-6 shadow-xl btn btn-big btn-primary">Get started → </a>
+      </div>
+    </div>
+    <ul class="hidden lg:block">
+      <% if @featured_account %>
+        <%= render "showcase_card", account: Account.find_by_slug('philipithomas') %>
+      <% end %>
+    </ul>
+  </div>
+</div>

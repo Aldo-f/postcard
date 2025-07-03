@@ -1,0 +1,46 @@
+<div class="flex justify-between">
+  <h1 class="dashboard-title">
+    Import subscribers
+  </h1>
+
+  <%= link_to "Discard",
+     page_subscribers_imports_path(@account),
+    class: "link"
+  %>
+</div>
+
+<div class="my-6 prose ">
+  <p>Upload a CSV file with the email addresses of your subscribers.</p>
+  <p>Postcard scans the entire spreadsheet - so, the specific format or columns don't matter.</p>
+  <p>To prevent spam, please share the source of this list and how you collected these email addresses.</p>
+</div>
+
+<%= form_with(url: page_subscribers_imports_path(@account),
+    local: true,
+    model: @subscribers_import,
+    method: :post,
+  ) do |f| %>
+  <div class="my-6 md:my-8 form-space">
+
+    <%= render 'shared/form_error_messages', object: f.object %>
+
+    <div>
+      <%= f.label :file, 'File', class: 'form-label' %>
+      <div class="mt-1">
+        <%= f.file_field :file, class: 'form-input', autofocus: true, autocomplete: "off", accept: ".csv", required: true %>
+      </div>
+    </div>
+
+
+    <div>
+      <%= f.label :sources_description, 'Where does this list come from?', class: 'form-label' %>
+      <div class="mt-1">
+        <%= f.text_area :sources_description, class: 'form-input', rows: 3, autocomplete: "off", required: true %>
+      </div>
+    </div>
+
+    <div class="mt-12 btn-group">
+      <%= render :partial => "shared/primary_button_loading", locals: { label: 'Import', arrow: true} %>
+    </div>
+  </div>
+<% end %>

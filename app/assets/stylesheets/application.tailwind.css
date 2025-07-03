@@ -1,0 +1,475 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  font-display: block;
+}
+
+.homepage-label {
+  @apply text-sm;
+  @apply font-semibold;
+  @apply leading-6;
+  @apply uppercase;
+  @apply text-accent;
+}
+
+
+.form-label {
+  @apply block;
+  @apply text-sm;
+  @apply font-medium;
+  @apply text-gray-700;
+}
+
+.form-input {
+  @apply block;
+  @apply w-full;
+  @apply px-3;
+  @apply py-2;
+  @apply placeholder-gray-400;
+  @apply border;
+  @apply border-gray-200;
+  @apply rounded;
+  @apply appearance-none;
+  @apply text-base;
+  @apply bg-white;
+  @apply text-gray-900;
+  @apply focus:ring-gray-300;
+}
+
+.form-input-inline {
+  @apply block;
+  @apply w-full;
+  @apply py-2;
+  @apply px-0;
+  @apply placeholder-gray-400;
+  @apply appearance-none;
+  @apply text-base;
+  @apply bg-white;
+  @apply text-gray-900;
+  @apply focus:outline-none;
+  @apply border-none;
+  @apply focus:border-none;
+  @apply focus:shadow-none;
+  @apply focus:ring-0;
+  @apply focus:outline-none;
+  @apply caret-accent;
+  @apply placeholder-gray-200;
+}
+.form-input-inline:empty:before{
+  content: attr(placeholder);
+  @apply text-gray-200
+}
+
+.prose>div, .prose {
+ padding-bottom:.75rem;
+ padding-top:.75rem
+}
+
+.prose p.is-editor-empty:first-child::before {
+  @apply text-gray-200;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+
+.attachment--video {
+  @apply w-full;
+  @apply h-auto;
+  @apply object-cover;
+}
+.form-space {
+ @apply space-y-6;
+}
+
+.form-input:disabled {
+  @apply cursor-not-allowed;
+  @apply bg-gray-050;
+  @apply text-gray-700;
+}
+
+/* https://tailwindui.com/components/application-ui/forms/input-groups#component-1ef4d534fa0cbcb38331bafa5c352ff8 */
+.form-input-added-on {
+  @apply form-input;
+  @apply flex-1;
+  @apply min-w-0;
+  @apply rounded-none;
+  @apply rounded-r-md;
+
+}
+
+.form-input-added-on-parent {
+  .field_with_errors {
+    @apply flex-1;
+  }
+}
+
+.turbo-progress-bar {
+  @apply h-0.5;
+  @apply bg-accent;
+}
+
+img {
+  /* used for image loading */
+  text-indent:100%;
+  white-space:nowrap;
+  overflow:hidden;
+}
+img:-moz-loading {
+  visibility: hidden;
+}
+
+.container {
+  @apply px-6 mx-auto max-w-7xl lg:px-8;
+}
+
+.lg-container {
+  @apply px-0 mx-auto max-w-7xl lg:px-8 lg:mx-auto;
+}
+
+
+.btn {
+  @apply flex;
+  @apply inline-flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply px-4;
+  @apply py-2;
+  @apply rounded;
+  @apply font-medium;
+  @apply no-underline;
+  @apply cursor-pointer;
+  @apply border;
+  @apply border-accent;
+}
+
+.btn-big {
+  @apply px-8;
+  @apply py-3;
+  @apply md:py-4;
+  @apply md:text-lg;
+  @apply font-semibold;
+}
+
+.btn-small {
+  @apply px-2;
+  @apply py-1;
+  @apply text-sm;
+}
+
+.btn-responsive {
+  @apply btn-small;
+  @apply md:px-4;
+  @apply md:py-2;
+  @apply md:text-base;
+}
+
+.btn-primary {
+  @apply bg-accent;
+  @apply text-gray-050;
+}
+
+
+.btn-secondary {
+  @apply text-accent;
+  @apply border;
+  @apply border-accent;
+  @apply bg-white;
+}
+
+
+.btn-tertiary {
+  @apply bg-gray-050;
+  @apply text-gray-700;
+  @apply border-gray-700;
+}
+
+
+.trix-editor {
+  @apply prose;
+  @apply max-w-none;
+  @apply focus:outline-none;
+  @apply focus:ring-gray-500;
+  @apply focus:border-gray-500;
+  @apply focus:ring-0 !important;
+  min-height:200px;
+}
+
+.public-page-container {
+  @apply max-w-3xl;
+  @apply px-6;
+  @apply mx-auto;
+  @apply lg:px-8;
+  @apply w-full;
+}
+
+
+.dashboard-container {
+  @apply px-4;
+  @apply sm:px-8;
+  @apply lg:px-12;
+  @apply mx-auto;
+  @apply w-full;
+}
+.dashboard-y-container {
+  @apply py-6;
+  @apply w-full;
+  @apply mb-8;
+  @apply lg:mb-0;
+}
+
+
+.dashboard-title {
+  @apply text-2xl;
+  @apply font-semibold;
+  @apply leading-6;
+  @apply text-gray-950;
+}
+
+.form-description {
+  @apply text-gray-700;
+  @apply text-xs;
+  @apply pt-1;
+}
+.badge {
+  @apply inline-flex;
+  @apply items-center;
+  @apply px-2.5;
+  @apply py-0.5;
+  @apply rounded-md;
+  @apply text-sm;
+  @apply font-medium;
+  @apply bg-accent;
+  @apply text-gray-050;
+}
+
+.badge-secondary {
+  @apply inline-flex;
+  @apply items-center;
+  @apply px-2.5;
+  @apply py-0.5;
+  @apply rounded-md;
+  @apply text-xs;
+  @apply font-medium;
+  @apply border;
+  @apply border-accent;
+  @apply text-accent;
+}
+
+.badge-secondary-gray {
+  @apply inline-flex;
+  @apply items-center;
+  @apply px-2.5;
+  @apply py-0.5;
+  @apply rounded-md;
+  @apply text-xs;
+  @apply font-medium;
+  @apply border;
+  @apply border-gray-600;
+  @apply text-gray-600;
+}
+
+.record {
+  @apply bg-gray-050;
+  @apply font-mono;
+  @apply text-gray-700;
+  @apply px-1;
+  @apply rounded-sm;
+  @apply select-all;
+}
+
+.link {
+  @apply text-accent;
+  @apply underline;
+  @apply cursor-pointer;
+}
+
+/* Type setting */
+
+.prose {
+  @apply text-gray-950;
+  @apply max-w-none;
+  @apply leading-relaxed;
+}
+
+.prose h1, h2 {
+  @apply text-2xl;
+  @apply font-bold;
+  @apply leading-tight;
+  @apply text-gray-925;
+}
+
+.prose h3 {
+  @apply text-xl;
+  @apply font-semibold;
+  @apply leading-tight;
+  @apply text-gray-925;
+}
+
+.prose h4 {
+  @apply text-lg;
+  @apply font-semibold;
+  @apply leading-tight;
+  @apply text-gray-925;
+}
+
+
+.prose blockquote {
+  @apply font-normal;
+  @apply !border-accent;
+  @apply not-italic;
+  border-left-width: 2px;
+}
+
+.prose a {
+  @apply !font-normal;
+}
+.prose img {
+  max-width: 100%;
+  height: auto;
+  @apply my-0;
+  @apply mx-auto;
+}
+.prose ul {
+  @apply marker:text-gray-800;
+}
+.prose .attachment {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  @apply my-4;
+}
+.prose .attachment a {
+  color: inherit;
+  text-decoration: none;
+}
+.prose .attachment a:hover,
+.prose .attachment a:visited:hover {
+  color: inherit;
+}
+.prose .attachment__caption {
+  text-align: center;
+}
+.prose .attachment__caption .attachment__name + .attachment__size::before {
+  content: " · ";
+}
+.prose .attachment--preview {
+  width: 100%;
+  text-align: center;
+}
+.prose .attachment--preview .attachment__caption {
+  color: #666;
+  font-size: 0.9em;
+  line-height: 1.2;
+}
+.prose .attachment--file {
+  color: #333;
+  line-height: 1;
+  margin: 0 2px 2px 2px;
+  padding: 0.4em 1em;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+.prose .attachment-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+.prose .attachment-gallery .attachment {
+  flex: 1 0 33%;
+  padding: 0 0.5em;
+  max-width: 33%;
+}
+.prose .attachment-gallery.attachment-gallery--2 .attachment,
+.prose .attachment-gallery.attachment-gallery--4 .attachment {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+
+.flash {
+  @apply text-sm;
+  @apply font-semibold;
+  @apply text-gray-950;
+  @apply w-full;
+  @apply max-w-sm;
+  @apply overflow-hidden;
+  @apply rounded-lg;
+  @apply shadow-lg;
+  @apply pointer-events-auto;
+  @apply lg:mb-0;
+  @apply bg-white;
+  @apply border;
+  @apply border-gray-200;
+  @apply p-4;
+}
+
+
+.placeholder-center::placeholder,
+.placeholder-center::-webkit-input-placeholder,
+.placeholder-center:-moz-placeholder,
+.placeholder-center::-moz-placeholder,
+.placeholder-center:-ms-input-placeholder,
+.placeholder-center::-ms-input-placeholder {
+    text-align: center;
+}
+
+.dropdown-menu {
+  @apply absolute;
+  @apply z-40;
+  @apply bg-white;
+  @apply rounded-md;
+  @apply shadow-lg;
+  @apply ring-1;
+  @apply ring-black;
+  @apply ring-opacity-5;
+  @apply focus:outline-none;
+  @apply w-48;
+  @apply py-1;
+}
+
+.dropdown-menu-item {
+  @apply flex;
+  @apply block;
+  @apply px-4;
+  @apply py-2;
+  @apply text-sm;
+  @apply text-gray-700;
+  @apply hover:bg-gray-050;
+  @apply hover:text-gray-900;
+}
+
+.page-title {
+  @apply text-3xl;
+  @apply font-bold;
+  @apply leading-relaxed;
+  @apply lg:text-4xl;
+  @apply text-gray-950;
+  @apply break-words;
+}
+
+trix-toolbar {
+  @apply sticky;
+  @apply top-0;
+  @apply z-10;
+}
+
+trix-editor:empty:not(:focus)::before {
+  @apply text-gray-200;
+}
+
+.overlay {
+  height: 0px;
+  overflow: visible;
+  pointer-events: none;
+  background:none !important;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+}

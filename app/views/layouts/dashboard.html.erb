@@ -1,0 +1,116 @@
+<% content_for :head do %>
+
+<% end %>
+
+<%
+menuItems = [
+  {
+    name: "Page",
+    to: page_path(@account),
+    icon: "user-circle",
+    active: request.path == page_path(@account) || request.path == edit_page_path(@account),
+    newTab: false
+  },
+  {
+    name: "Posts",
+    to: page_posts_path(@account),
+    icon: "paper-airplane", # users, user-community
+    active: request.path.start_with?(page_posts_path(@account)),
+    newTab: false
+  },
+  {
+    name: "List",
+    to: page_subscribers_path(@account),
+    icon: "queue-list", # users, user-community
+    active: request.path.start_with?(page_subscribers_path(@account)),
+    newTab: false
+  }
+]
+
+unless Rails.configuration.solo_mode
+  menuItems << {
+    name: 'Gallery',
+    to: page_showcase_index_path(@account),
+    icon: 'squares-2x2',
+    active: request.path.start_with?(page_showcase_index_path(@account)),
+    newTab: false
+  }
+end
+
+secondaryMenuItems = [
+  {
+    name: "Updates",
+    newTab: true,
+    to: 'https://updates.postcard.page',
+    show: true
+  },
+  {
+    name: "Billing",
+    newTab: false,
+    to: page_billing_path(@account),
+    show: @account&.active_subscription? && Rails.configuration.multiuser_mode
+  },
+  {
+    name: "Queue",
+    newTab: true,
+    to: "/jobs",
+    show: @account&.admin?
+  },
+  {
+    name: "Analytics",
+    newTab: true,
+    to: blazer_path,
+    show: @account&.admin?
+  },
+  {
+    name: "DB",
+    newTab: true,
+    to: pg_hero_path,
+    show: @account&.admin?
+  },
+  {
+    name: "Emails",
+    newTab: true,
+    to: "/letter_opener",
+    show: @account&.admin? && Rails.env.development?
+  },
+  {
+    name: Rails.configuration.solo_mode ? "Report an issue" : "Contact support",
+    newTab: true,
+    to: Rails.configuration.solo_mode ? 'https://github.com/contraptionco/postcard/issues/new' : 'mailto:postcard@contraption.co',
+    show: true,
+  },
+  {
+    name: "Sign out",
+    newTab: false,
+    to: destroy_account_session_path,
+    show: true,
+    data: { 'turbo-method': :delete }
+  }
+]
+%>
+
+<% content_for :content do %>
+  <div
+    class="h-full flex flex-col"
+  >
+    <!-- Narrow sidebar -->
+    <%= render "layouts/dashboard/sidenav", menuItems: menuItems, secondaryMenuItems: secondaryMenuItems %>
+
+    <% if content_for?(:top_nav) %>
+      <header class="fixed z-20 w-full lg:pl-20 inline-block">
+        <div class="relative z-10 flex h-16 lg:h-20 flex-shrink-0 border-b border-gray-200 bg-gray-050">
+          <%= yield :top_nav %>
+        </div>
+      </header>
+    <% end %>
+
+    <!-- Content area -->
+    <main class="grow flex flex-1 flex-col items-stretch lg:pb-0 lg:pl-20 h-full overflow-y-auto <% if content_for?(:top_nav) %> pt-16 lg:pt-20 <% end %>" id="main">
+      <%= content_for?(:dashboard_content) ? yield(:dashboard_content) : yield %>
+    </main>
+    <%= render 'layouts/dashboard/mobile_bottom_nav', menuItems: menuItems, secondaryMenuItems: secondaryMenuItems %>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

@@ -1,0 +1,22 @@
+<%
+disabled = defined?(:disabled) ? disabled : false
+%>
+<div class="w-full bg-white min-h-screen flex flex-col">
+  <div class="flex-grow">
+    <div>
+      <%= render "public_pages/page/cover", picture: post.account.cover, alt: "Cover photo for #{post.account.name}", classes: "h-36 lg:h-60" %>
+    </div>
+    <%= render :partial => 'public_pages/page/profile_photo', locals: {account: post.account} %>
+    <%= render :partial => 'public_pages/page/title', locals: {title: post.subject } %>
+    <div class="public-page-container pt-2">
+      <%= render :partial => 'posts/byline', locals: {post: post } %>
+    </div>
+    <%= render :partial => 'public_pages/page/body', locals: {body: post.body} %>
+  </div>
+  <div class="bg-gray-050 mt-12 py-12 w-full">
+    <%= render :partial => 'public_pages/page/subscribe', locals: {account: post.account, disabled: disabled} %>
+  </div>
+  <div class="bg-gray-075 bg-opacity-75 w-full py-8 w-full">
+    <%= render :partial => 'public_pages/page/footer', locals: {account: post.account, disabled: disabled } %>
+  </div>
+</div>

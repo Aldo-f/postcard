@@ -1,0 +1,29 @@
+<% title 'Choose domain' %>
+
+<% content_for :heading do %>
+  Choose your Postcard domain
+<% end %>
+
+<div class="prose">
+  Use a Postcard domain free until you're ready for your own.
+</div>
+
+<%= form_with(
+  model: @account,
+  url: request.path,
+  method: :put,
+  local: true) do |f|
+  %>
+  <div class="form-space">
+    <%= render 'shared/form_error_messages', object: f.object %>
+    <div>
+      <%= f.label :slug, 'Subdomain', class: 'form-label' %>
+      <div class="flex mt-1 rounded-md shadow-sm">
+        <%= f.text_field :slug, class: 'form-input flex-1 min-w-0 !rounded-none !rounded-l-md rounded-r-none', autofocus: true, autocomplete: "off" %>
+        <span class="inline-flex items-center px-3 text-gray-500 border border-l-0 border-gray-300 bg-gray-075 rounded-r-md sm:text-sm">.<%= Rails.configuration.base_host %></span>
+      </div>
+    </div>
+
+    <%= render :partial => "shared/primary_button_loading", locals: { label: 'Save', classes: "w-full", arrow: true } %>
+  </div>
+<% end %>

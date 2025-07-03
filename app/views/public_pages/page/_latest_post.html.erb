@@ -1,0 +1,8 @@
+<div class="public-page-container pt-2">
+  <a href="<%= public_post_url(post, domain: account.host, protocol: request.protocol) %>" target="_blank">
+    <span class="badge">New</span>
+    <span class="link text-sm">
+      <%= post.subject %> →
+    </span>
+  </a>
+</div>

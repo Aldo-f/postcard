@@ -1,0 +1,18 @@
+<% title 'Discover' %>
+<%= render "nav" %>
+
+<div class="dashboard-container">
+  <div class="w-full text-center pt-8 pb-16">
+    <h1 class="text-3xl tracking-tight font-bold text-gray-950 xl:text-4xl leading-tight">
+      Discover <span class="text-accent">personal websites</span> made with Postcard
+    </h1>
+  </div>
+  <ul role="list" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 pb-16">
+    <% @accounts.each do |account| %>
+      <%= render 'showcase_card', account: account %>
+    <% end %>
+  </ul>
+</div>
+
+<%= render 'cta' %>
+<%= render 'footer' %>

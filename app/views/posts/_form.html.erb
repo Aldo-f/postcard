@@ -1,0 +1,42 @@
+
+<%= form_with(
+    url: post.published? ? page_post_path(post.account, post) : request.path,
+    local: true,
+    model: post,
+    method: :put,
+    id: "post-#{post.id}",
+    class: 'h-full',
+    data: post.published? ? {} : { controller: 'autosave', autosave_target: 'form' }
+  ) do |f| %>
+  <div class="my-6 md:my-8 public-page-container h-full">
+    <%= render 'shared/form_error_messages', object: f.object %>
+
+    <div
+      <% unless post.published? %>
+        data-controller="editable" data-editable-autofocus-value="true"
+      <% end %>
+      >
+      <h1 contenteditable class="form-input-inline page-title"
+        data-editable-target="content"
+        data-action="keyup->editable#changed keyup->editable#debouncedSave"
+        data-placeholder="Title"
+        placeholder="Title"
+        ><%= post.subject %></h1>
+
+      <%= f.hidden_field :subject,
+        class: 'form-input-inline page-title',
+        value: post.subject,
+        data: { editable_target: 'input' }
+        %>
+    </div>
+
+    <div class="min-h-full h-auto mt-3">
+      <%= f.rich_text_area :body,
+        class: 'form-input prose trix-editor h-full form-input-inline',
+        autocomplete: "off",
+        data: { action: 'keyup->autosave#debouncedSave'},
+        placeholder: "Write your post here..."
+         %>
+    </div>
+  </div>
+<% end %>

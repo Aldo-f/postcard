@@ -1,0 +1,25 @@
+<div class="flex flex-col mt-8">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+      <table class="min-w-full divide-y divide-gray-300">
+        <thead>
+          <tr>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-950 sm:pl-6 md:pl-0">Email</th>
+            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-950">Joined</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <% subscriptions.each do |subscription| %>
+            <tr>
+              <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-950 whitespace-nowrap sm:pl-6 md:pl-0"><%= subscription.email_address.email %></td>
+              <td class="px-3 py-4 text-sm text-gray-700 whitespace-nowrap">
+                <%= local_time(subscription.verified_at, '%B %e, %Y') %>
+              </td>
+            </tr>
+          <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

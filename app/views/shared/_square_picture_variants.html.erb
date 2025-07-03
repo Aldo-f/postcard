@@ -1,0 +1,16 @@
+<picture>
+  <source type="image/webp"
+    srcset="<%= cdn_proxy_url(picture.variant(convert: :webp, resize_to_fill: [size, size, { crop: :attention }])) %>,
+      <%= cdn_proxy_url(picture.variant(convert: :webp, resize_to_fill: [size*2, size*2, { crop: :attention }])) %> 2x,
+      <%= cdn_proxy_url(picture.variant(convert: :webp, resize_to_fill: [size*3, size*3, { crop: :attention }])) %> 3x"
+    >
+  <img class="<%= classes %>"
+    width="<%= size %>"
+    height="<%= size %>"
+    src="<%= cdn_proxy_url(picture.variant(resize_to_fill: [size, size, { crop: :attention }])) %>"
+    alt="<%= alt %>"
+    srcset="<%= cdn_proxy_url(picture.variant(resize_to_fill: [size, size, { crop: :attention }])) %>,
+            <%= cdn_proxy_url(picture.variant(resize_to_fill: [size*2, size*2, { crop: :attention }])) %> 2x,
+            <%= cdn_proxy_url(picture.variant(resize_to_fill: [size*3, size*3, { crop: :attention }])) %> 3x"
+    />
+</picture>

@@ -1,0 +1,41 @@
+<% content_for :summary do %>
+  <%= number_to_human(@visitor_count) %> people viewed <%= number_to_human(@view_count) %> pages on <%= @account.pretty_host %> in the last week
+<% end %>
+
+
+<% if @most_visited.length > 1 %>
+  <p>
+      In the last week, <b><%= number_to_human(@visitor_count) %></b> people visited <a href="<%= @account.url %>"><%= @account.pretty_host %></a> and viewed <b><%= number_to_human(@view_count) %></b> pages.
+  </p>
+  <p>
+    The most-viewed pages were:
+  </p>
+  <ul>
+    <% @most_visited.each do |page| %>
+      <li>
+        <a href="<%= page.url %>">
+          <% url = URI.parse(page.url) %>
+          <%= url.host + (url.path == '/' ? '' : url.path) %></a>
+        <i>(<%= number_to_human(page.views) %> <%= 'views'.pluralize(page.views) %>)</i>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @referrers.length > 0 %>
+  <p>
+    Here are the top ways people found <%= @account.pretty_host %>:
+  <p>
+  <ul>
+    <% @referrers.each do |referrer| %>
+      <li>
+        <%= referrer.referrer_domain %>
+        <i>(<%= number_to_human(referrer.visitors) %> <%= 'visitors'.pluralize %>)</i>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% content_for :button_label do %>Sign in &rarr;<% end %>
+
+<% content_for :button_link do %><%= page_url(@account) %><% end %>

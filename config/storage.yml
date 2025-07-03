@@ -1,0 +1,37 @@
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+# Amazon S3 configuration using environment variables
+amazon:
+  service: S3
+  access_key_id: <%= Rails.configuration.aws[:access_key_id] %>
+  secret_access_key: <%= Rails.configuration.aws[:secret_access_key] %>
+  region: <%= Rails.configuration.aws[:region] %>
+  bucket: <%= Rails.configuration.aws[:storage_bucket] %>
+  upload:
+    cache_control: 'public, max-age=315360000'
+    server_side_encryption: AES256
+
+# Remember not to checkin your GCS keyfile to a repository
+# google:
+#   service: GCS
+#   project: your_project
+#   credentials: <%= Rails.root.join("path/to/gcs.keyfile") %>
+#   bucket: your_own_bucket
+
+# Azure Storage configuration using environment variables
+# microsoft:
+#   service: AzureStorage
+#   storage_account_name: your_account_name
+#   storage_access_key: <%= ENV['AZURE_STORAGE_ACCESS_KEY'] %>
+#   container: your_container_name
+
+# mirror:
+#   service: Mirror
+#   primary: local
+#   mirrors: [ amazon, google, microsoft ]

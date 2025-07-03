@@ -1,0 +1,25 @@
+<% content_for :content do %>
+  <div class="min-h-full flex flex-col items-stretch">
+    <nav class="bg-white shadow-lg fixed w-full h-12 md:h-16 z-30 flex items-center">
+      <div class="dashboard-container grow">
+        <div class="grid grid-cols-3 items-center">
+          <div class="justify-self-start">
+            <% if content_for?(:left) %><%= yield(:left) %><% end %>
+          </div>
+          <h1 class="font-semibold sm:text-xl text-center text-gray-950 block">
+            <%= yield(:heading) %>
+          </h1>
+          <div class="justify-self-end">
+            <% if content_for?(:right) %><%= yield(:right) %><% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <%# REMINDER - put a `grow` class on child elemenet %>
+    <div class="grow flex items-stretch mt-12 md:mt-16">
+      <%= content_for?(:whole_page_content) ? yield(:whole_page_content) : yield %>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

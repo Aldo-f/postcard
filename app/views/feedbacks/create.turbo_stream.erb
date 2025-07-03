@@ -1,0 +1,9 @@
+<%= turbo_stream.update "feedback" do %>
+  <a
+    class="flex text-sm text-accent justify-center py-2 px-3 space-x-1"
+    href="<%= new_feedback_path %>"
+    >
+    <%= heroicon "check-circle", class: "h-5 w-5" %>
+    <span>Thanks!</span>
+  </a>
+<% end %>

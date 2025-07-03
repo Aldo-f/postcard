@@ -1,0 +1,63 @@
+<% content_for :top_nav do %>
+  <div class="dashboard-container h-full flex items-center justify-between">
+    <div class="flex-grow truncate">
+      <% unless Rails.configuration.solo_mode %>
+      <% if @account.unverified_domain? %>
+        <div class="flex items-center">
+          <%= render "shared/spinner", class: "text-accent" %>
+          <a
+            class="ml-2 text-sm font-semibold text-gray-800 hover:underline"
+            href="<%= page_setup_path(@account, :domain_configure) %>">
+            Custom domain deploying
+          </a>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="space-x-4 shrink-0">
+      <% unless Rails.configuration.solo_mode %>
+      <% unless @account.domains.length.positive? %>
+        <a class="my-4 md:my-0 btn btn-secondary" href="<%= page_setup_url(@account, :domain) %>">
+          <span class="md:hidden">Connect domain</span>
+          <span class="hidden md:inline">Connect custom domain</span>
+        <% end %>
+      <% end %>
+      <a class="my-4 md:my-0 btn btn-primary flex items-center space-x-1" href="<%= edit_page_path(@account) %>">
+        <%= heroicon "pencil", class: "w-4 h-4", variant: :solid %>
+        <span class="md:hidden">Edit</span>
+        <span class="hidden md:inline">Edit page</span>
+      </a>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :hide_feedback do %>!<% end %>
+
+<div
+  class="relative mb-14 lg:mb-0 h-full w-full overflow-y-auto"
+  data-controller="overlay"
+  >
+  <a
+    class="min-h-full w-full cursor-default z-10 absolute"
+    href="<%= @account.url %>"
+    target="_blank"
+    rel="noopener"
+    data-overlay-target="overlay"
+  ></a>
+  <div tabindex="-1" data-overlay-target="covered">
+    <%= render :partial => "public_pages/page", locals: {account: @account, disabled: true, simple_mode: true} %>
+  </div>
+
+  <a class="w-full fixed flex justify-center z-10 h-auto bottom-16 lg:bottom-4"  href="<%= @account.url %>" target="_blank" rel="noopener" >
+    <div class="rounded-full font-medium bg-accent z-10 shadow-sm px-4 py-2 text-sm flex items-center space-x-1">
+      <div class="text-on-accent flex items-center space-x-2">
+        <div>
+          Live at
+          <%= @account.host %>
+        </div>
+        <%= heroicon "arrow-top-right-on-square", class: "block text-on-accent h-4 w-4" %>
+      </div>
+    </div>
+  </a>
+</div>
+

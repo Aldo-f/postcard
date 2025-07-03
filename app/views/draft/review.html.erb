@@ -1,0 +1,31 @@
+<%
+  subscribers = @account.subscriptions.active.count
+  publish_message = subscribers.positive? ? "Are you sure you want to publish this post and email it to #{pluralize(subscribers, 'person')}?" : "Are you sure you want to publish this post?"
+%>
+
+
+<% content_for :top_nav do %>
+  <div class="dashboard-container h-full flex items-center justify-between">
+    <div class="flex-grow truncate">
+      <a href="<%= edit_page_post_path(@account, @post) %>" class="text-sm link">
+        ←
+        Back
+      </a>
+    </div>
+    <div class="space-x-4 shrink-0">
+      <%= link_to "Publish →",
+        request.path,
+        class: "btn btn-primary",
+        data: { turbo_method: :put, 'turbo-confirm': publish_message }
+        %>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :hide_feedback do %>!<% end %>
+
+<div class="relative mb-14 lg:mb-0 h-full w-full overflow-y-auto">
+  <div tabindex="-1" class="overlay">
+    <%= render :partial => "posts/post", locals: {post: @post, account: @account, disabled: true } %>
+  </div>
+</div>

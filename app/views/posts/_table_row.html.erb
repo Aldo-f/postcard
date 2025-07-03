@@ -1,0 +1,52 @@
+
+<tr id="row_<%= post.id %>" class="hover:bg-gray-050">
+  <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-950 whitespace-nowrap sm:pl-6 md:pl-0">
+    <a href="<%= edit_page_post_path(account, post) %>"
+      class="link">
+      <%= post.subject.present? ? post.subject : 'Untitled' %>
+    </a>
+  </td>
+  <td class="px-3 py-4 text-sm text-gray-700 whitespace-nowrap">
+    <% if account.pinned_post_id == post.id %>
+      <div
+        class="inline-flex items-center !pr-1 space-x-1 badge"
+        >
+        <span class="">Featured</span>
+        <%= form_with(model: account, url: page_account_path(account), method: :put, local: true) do |f| %>
+          <%= f.hidden_field :pinned_post_id, value: nil %>
+          <button
+            type="submit"
+            class="ml-0.5 inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full text-gray-200 hover:bg-gray-100 hover:text-gray-800 focus:bg-gray-200 focus:text-gray-900 focus:outline-none transition ease-in-out duration-150 hover:bg-opacity-75"
+          >
+            <span class="sr-only">Remove post as featured</span>
+            <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+              <path strokeLinecap="round" strokeWidth="1.5" d="M1 1l6 6m0-6L1 7" />
+            </svg>
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+  </td>
+  <td class="px-3 py-4 text-sm text-gray-700 whitespace-nowrap">
+    <% if post.published? && post.finished_sending? %>
+      <%= render "posts/visibility_dropdown", post: post, account: account %>
+    <% elsif post.published? %>
+      <div class="text-accent-if-contrast">Sending . . .</div>
+    <% else %>
+      <div class="text-gray-700">
+        <%= heroicon "lock-closed", class: "inline-block h-4 w-4 mr-1" %>
+        <span>Draft</span>
+      </div>
+    <% end %>
+  </td>
+  <td>
+    <% if post.published? %>
+      <div class="px-3 py-4 text-sm text-gray-700 whitespace-nowrap">
+        <%= local_time(post.published_at, '%B %e, %Y') %>
+      </div>
+    <% end %>
+  </td>
+  <td>
+    <%= render "posts/table_dropdown", post: post, account: account %>
+  </td>
+</tr>

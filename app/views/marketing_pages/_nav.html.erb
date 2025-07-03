@@ -1,0 +1,53 @@
+<%
+menuItems = {
+  "Pricing" => "/#pricing",
+  "What's new" => "https://updates.postcard.page/posts?utm_source=postcard.page&utm_medium=marketing+nav&utm_campaign=whats+new",
+}
+%>
+<header class="z-20 py-10 bg-white">
+  <div class="dashboard-container">
+    <nav class="relative z-50 flex justify-between w-full  bg-white">
+      <div class="flex items-center md:gap-x-12">
+        <a href="/" aria-label="Home">
+          <img class="h-7 w-auto inline-block" src="<%= asset_path("logo/wordmark.svg") %>" alt="Postcard" width="122" h="28">
+        </a>
+        <div class="hidden md:flex md:gap-x-6">
+          <% menuItems.each do |name, to| %>
+            <a
+              href="<%= to %>"
+              class="inline-block rounded-lg py-1 px-2 text-sm text-gray-700 hover:bg-gray-050 text-gray-950"
+              <% if to.starts_with?('http') %>
+                target="_blank"
+                rel="noopener"
+              <% end %>
+              >
+              <%= name %>
+            </a>
+          <% end %>
+        </div>
+      </div>
+      <div class="flex items-center gap-x-5 md:gap-x-8">
+        <div class="hidden md:block">
+          <a
+            href="<%= new_session_path('account') %>"
+            class="inline-block rounded-lg py-1 px-2 text-sm text-gray-700 hover:bg-gray-050 text-gray-950"
+            >
+            Sign in
+          </a>
+        </div>
+
+        <a
+          href="<%= new_registration_path('account') %>"
+          class="btn btn-primary"
+          >
+          <span>
+            Get started
+          </span>
+        </a>
+        <div class="-mr-1 md:hidden">
+          <%= render "mobile_nav", menuItems: menuItems %>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

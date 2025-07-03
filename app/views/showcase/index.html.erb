@@ -1,0 +1,12 @@
+<h1 class="dashboard-title">
+  <%= title 'Gallery' %>
+</h1>
+<%= link_to "Submit your page →", "mailto:postcard+showcase@contraption.co?subject=Add%20#{@account.host}%20to%20gallery,%20please!", class: 'text-gray-500 underline text-sm mt-2 block' %>
+
+<ul role="list" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 pt-8">
+  <% @showcases.each_with_index do |account, ix| %>
+    <div class="flex items-stretch grid grid-cols-1 col-span-1">
+      <%= render 'marketing_pages/showcase_card', account: account %>
+    </div>
+  <% end %>
+</ul>

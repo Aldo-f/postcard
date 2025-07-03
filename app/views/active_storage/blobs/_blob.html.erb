@@ -1,0 +1,29 @@
+<figure class="attachment attachment--<%= blob.video? ? "video" : (blob.representable? ? "preview" : "file") %> attachment--<%= blob.filename.extension %>">
+  <% if blob.video? %>
+
+  <%= video_tag cdn_proxy_url(blob),
+          controls: true,
+          preload:  "metadata",
+          class:    "attachment__video" %>
+
+  <% elsif blob.representable? %>
+
+  <%#  GIFs go through untouched so animations aren’t lost %>
+  <% if blob.content_type == "image/gif" %>
+  <%= image_tag cdn_proxy_url(blob),
+            loading:  "lazy",
+            decoding: "async",
+            class:    "attachment__image" %>
+  <% else %>
+  <%#  Use the full-resolution blob; no variant, no zoom_src %>
+  <%= image_tag cdn_proxy_url(blob),
+            loading:  "lazy",
+            decoding: "async",
+            class:    "attachment__image" %>
+  <% end %>
+  <% end %>
+
+  <% if caption = blob.try(:caption) %>
+  <figcaption class="attachment__caption"><%= caption %></figcaption>
+  <% end %>
+</figure>

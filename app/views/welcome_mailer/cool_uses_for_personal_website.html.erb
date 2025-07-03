@@ -1,0 +1,28 @@
+<% content_for :summary do %>
+  Power user tips for your personal website
+<% end %>
+
+<p>
+  Owning a personal domain name can give you unexpected benefits. Here are three powerful things you can do with a personal website:
+</p>
+
+<ol>
+  <li>
+    <strong>Send emails from your own domain:</strong> Replace your <i>gmail.com</i> address with something more professional, like <%= @account.primary_custom_domain ? @account.primary_custom_domain.domain : @account.slug + ".com" %>
+  </li>
+  <li>
+    <strong>See and track website visitors</strong>: Using Google Analytics or Fathom Analytics, you can see how many views your website gets, and who is linking to it. Just set up an account on either service, then add the tracking code to the “custom code” section on your Postcard page.
+  </li>
+  <li>
+    <strong>Show up in Google:</strong> With a personal domain, your website can automatically show up in Google when people search your name. For more advanced tools, sign up for <a href="https://search.google.com/search-console/about">Google Search Console</a> - which will show you how people discover your website, and even how many people search your name in Google each month.
+  </li>
+</ol>
+
+<p>
+  Try these out, and let me know your favorite!
+</p>
+
+
+<% content_for :button_label do %>Sign in<% end %>
+
+<% content_for :button_link do %><%= page_url(@account) %><% end %>

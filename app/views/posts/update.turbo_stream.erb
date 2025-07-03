@@ -1,0 +1,4 @@
+<%= turbo_stream.prepend "flash_messages" do %>
+  <%= render :partial => "layouts/flash", locals: { message: 'Post updated' } %>
+<% end %>
+<%= turbo_stream.replace "row_#{@post.id}", partial: "posts/table_row", locals: { post: @post, account: @account } %>

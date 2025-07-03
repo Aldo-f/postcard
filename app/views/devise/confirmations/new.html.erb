@@ -1,0 +1,21 @@
+<% content_for :heading do %>Resend confirmation instructions<% end %>
+<% content_for :subheading do %>
+  Or,
+  <a href="<%= new_session_path(resource_name)  %>" class="font-medium text-accent hover:underline">sign in</a>.
+<% end %>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <div class="form-space">
+
+    <%= render 'shared/form_error_messages', object: f.object %>
+
+    <div class="field">
+      <%= f.label :email, class: 'form-label' %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-input' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Resend confirmation instructions" , class: "btn btn-primary w-full" %>
+    </div>
+  </div>
+<% end %>

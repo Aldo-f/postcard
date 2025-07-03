@@ -1,0 +1,28 @@
+<div class="hidden overflow-hidden lg:block">
+  <div class="relative">
+    <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
+      <div class="max-w-xl px-4 mx-auto sm:px-6 lg:py-16 lg:max-w-none lg:mx-0 lg:px-0">
+        <div>
+          <div class="mt-6">
+            <h2 class="text-4xl font-bold tracking-tight sm:text-5xl text-gray-950">
+              Write once, <br />share everywhere
+            </h2>
+            <p class="mt-4 text-lg text-gray-800">
+              Enable people to subscribe to your posts, and send polished emails through Postcard. Export the list at any time.</p>
+            <div class="mt-6">
+              <a href="<%= new_registration_path('account') %>" class="btn btn-primary">Get started →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-12 sm:mt-16 lg:mt-0">
+        <div class="pl-4 -mr-48 overflow-hidden sm:pl-6 md:-mr-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
+          <picture>
+            <source type="image/webp" srcset="<%= asset_path("homepage/post.webp") %>">
+            <img class="w-full shadow-xl rounded-xl ring-1 ring-accent ring-opacity-5 lg:absolute lg:left-0 lg:h-auto lg:w-full lg:max-w-none" src="<%= asset_url 'homepage/post.png' %>" alt="Postcard post" loading="lazy" width="1092" height="1140">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

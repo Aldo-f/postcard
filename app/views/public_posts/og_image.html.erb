@@ -1,0 +1,32 @@
+
+<div class="w-full bg-white h-screen">
+  <div class="">
+    <img
+      class="object-cover w-full h-36 bg-gray-050"
+        src="<%= account.cover.attached? ? cdn_proxy_url(account.cover.variant(convert: :webp, resize_to_limit: [1920, nil]).processed) : asset_path('postcards.jpg') %>"
+      />
+    <div class="px-36 flex justify-between items-center">
+      <div class="-mt-24">
+        <div class="flex">
+          <img class="h-48 w-48 rounded-full ring-4 ring-white"
+            src="<%= account.photo.attached? ? cdn_proxy_url(account.photo.variant(resize_to_fill: [288, 288, { crop: :attention }]).processed) : asset_path('logo/icon.png') %>"
+            />
+        </div>
+      </div>
+    </div>
+    <div class="px-36">
+      <h1 class="text-5xl font-bold text-gray-950 leading-tight mt-4 line-clamp-2"><%= post.subject %></h1>
+      <div class="block mt-6 text-gray-800 truncate text-4xl font-semibold">
+        <%= post.account.name %>
+      </div>
+      <div class="btn btn-primary shadow-2xl mt-8 !rounded-2xl">
+        <span class="text-2xl font-bold ">
+          View post
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 pl-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>

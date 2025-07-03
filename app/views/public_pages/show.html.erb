@@ -1,0 +1,10 @@
+<% content_for :head do %>
+  <% if @account.code %>
+    <%= raw @account.code %>
+  <% end %>
+<% end %>
+
+<% cache [@account, "1"] do %>
+  <%= render :partial => "public_pages/page", locals: {account: @account, disabled: false} %>
+<% end %>
+

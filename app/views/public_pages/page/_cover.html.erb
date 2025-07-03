@@ -1,0 +1,36 @@
+<%
+simple_mode = defined?(:simple_mode) ? simple_mode : false
+%>
+<% if picture.attached? %>
+  <% widths = [400, 800, 1600, 3200, 6400 ] %>
+
+  <picture>
+    <% unless simple_mode %>
+      <source
+        type="image/webp"
+        srcset="
+          <% widths.each do |width| %>
+            <%= cdn_proxy_url(picture.variant(convert: :webp, resize_to_limit: [width, nil])) %> <%= width %>w,
+          <% end %>
+        "
+        sizes="<% if defined?(sizes) && sizes %><%= sizes %><% else %>100vw<% end %>"
+        >
+    <% end %>
+    <img
+      class="object-cover w-full bg-white <%= classes %>"
+      src="<%= cdn_proxy_url(picture) %>"
+      alt="<%= alt %>"
+      <% unless simple_mode %>
+      srcset="
+          <% widths.each do |width| %>
+            <%= cdn_proxy_url(picture.variant(resize_to_limit: [width, nil])) %> <%= width %>w,
+          <% end %>
+      "
+      sizes="<% if defined?(sizes) && sizes %><%= sizes %><% else %>100vw<% end %>"
+      <% end %>
+      >
+  </picture>
+<% else %>
+  <div class="object-cover w-full bg-white <%= classes %>">
+  </div>
+<% end %>

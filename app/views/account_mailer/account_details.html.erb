@@ -1,0 +1,19 @@
+<% content_for :summary do %>
+  Welcome to Postcard!
+<% end %>
+
+<p>
+  Welcome to <a href="https://www.postcard.page">Postcard</a>! Here are your account details:
+</p>
+
+<p>
+    Email: <%= @account.email %>
+</p>
+<p>
+    Page: <a href="<%= @account.url %>"><%= @account.host %></a>
+</p>
+
+<% content_for :button_label do %>Log in &rarr;<% end %>
+
+<% content_for :button_link do %>https://www.postcard.page<% end %>
+

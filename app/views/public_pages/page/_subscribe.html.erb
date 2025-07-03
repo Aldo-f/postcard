@@ -1,0 +1,17 @@
+<div class="public-page-container">
+  <%= form_with(model: @email_address, url: '/', local: true, method: :post,  :html => { :honeypot => true }) do |f| %>
+    <%= f.label :email, 'Subscribe to my updates', class: 'form-label' %>
+    <%= render 'shared/form_error_messages', object: f.object %>
+    <div class="mt-2 sm:flex sm:items-center">
+      <div class="w-full">
+        <%= f.email_field :email,
+          class: 'form-input',
+          type: 'email',
+          placeholder:
+          'hello@example.com',
+          disabled: disabled %>
+      </div>
+      <%= invisible_recaptcha_tags text: 'Subscribe', class: "btn btn-primary mt-2 sm:mt-0 w-full inline-flex sm:w-auto ml-0 sm:ml-2" %>
+    </div>
+  <% end %>
+</div>

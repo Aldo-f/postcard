@@ -1,0 +1,95 @@
+<% if @account&.accent_color %>
+<style>
+  .btn-primary {
+    background-color: <%= @account.accent_color %>;
+    color: <%= @account.accent_label_color %>;
+    border-color: <%= @account.accent_color %>;
+  }
+
+  .text-on-accent {
+    color: <%= @account.accent_label_color %>;
+  }
+
+  .badge {
+    background-color: <%= @account.accent_color %>;
+    color: <%= @account.accent_label_color %>
+  }
+
+  .spinner {
+    color: <%= @account.accent_label_color %> !important;
+  }
+
+  .badge-secondary {
+    border-color: <%= @account.accent_color %>;
+    <% if @account.accent_color_has_sufficient_contrast_to_light %>
+      color: <%= @account.accent_color %>;
+    <% else %>
+      color: <%= Account::DARK_LABEL_COLOR %>;
+    <% end %>
+  }
+
+  .prose a {
+    text-decoration-color: <%= @account.accent_color %>;
+  }
+
+  .bg-accent {
+    background-color: <%= @account.accent_color %>;
+  }
+
+  .text-accent {
+    color:  <%= @account.accent_color %>;
+  }
+
+  .border-accent {
+    border-color: <%= @account.accent_color %>
+  }
+  .hover\:border-accent:hover {
+    border-color: <%= @account.accent_color %>
+  }
+
+  .btn-secondary {
+    border-color: <%= @account.accent_color %>;
+    <% if @account.accent_color_has_sufficient_contrast_to_light %>
+      color: <%= @account.accent_color %>;
+    <% else %>
+      color: <%= Account::DARK_LABEL_COLOR %>;
+    <% end %>
+  }
+
+
+  .text-accent-if-contrast {
+    <% if @account.accent_color_has_sufficient_contrast_to_light %>
+      color: <%= @account.accent_color %>;
+    <% else %>
+      text-decoration: underline;
+      text-decoration-color: <%= @account.accent_color %>;
+    <% end %>
+  }
+
+  .link {
+    <% if @account.accent_color_has_sufficient_contrast_to_light %>
+      color: <%= @account.accent_color %>;
+    <% else %>
+      color: <%= Account::DARK_LABEL_COLOR %>;
+      text-decoration-color: <%= @account.accent_color %>;
+    <% end %>
+  }
+
+  .prose blockquote, .trix-content blockquote {
+    border-color: <%= @account.accent_color %> !important;
+  }
+
+  .form-input:focus{
+    --tw-ring-color: <%= @account.accent_color_rgb %> !important;
+    border-color: <%= @account.accent_color_rgb %> !important;
+  }
+  .form-input-inline {
+    caret-color: <%= @account.accent_color %>;
+  }
+
+  .turbo-progress-bar {
+    background-color: <%= @account.accent_color %>;
+  }
+</style>
+
+<% end %>

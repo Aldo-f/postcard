@@ -1,0 +1,91 @@
+<%
+steps = {
+  "Make a site in minutes": "Add your photo and biography, then publish to your own domain.",
+  "Feature it on your social profiles": "Add your homepage as the bio link on your social profiles. It both looks legit and helps people find your site.",
+  "Write on Postcard, then share everywhere": "When you have something to share, post on Postcard. Email subscribers will get it in their inbox. Then, share an enhanced link on sites like Twitter and LinkedIn.",
+  "Grow your mailing list": "As people subscribe to your newsletter, you build a list of contacts you own and can contact directly - no more depending on social networks.",
+}
+%>
+
+<% if @featured_account&.pinned_post %>
+<div class="dashboard-container">
+  <div class="grid grid-cols-1 gap-y-16 gap-x-8 sm:gap-y-20 lg:grid-cols-2 lg:items-start">
+    <div class="flex flex-col items-stretch w-full h-full lg:items-center lg:flex-row">
+      <div class="flex p-2 bg-white lg:p-4 rounded-xl bg-gray-900/5 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl">
+        <div class="flex flex-shrink-0 w-full h-full p-4 bg-white rounded-md shadow-2xl ring-1 ring-gray-900/10 lg:p-4">
+          <div class="flex w-full overflow-hidden">
+            <div class="hidden w-16 text-right grow-0 shrink-0 md:block">
+              <a href="<%= @featured_account.url %>" target="_blank" rel="noopener">
+                <%= render "shared/square_picture_variants", picture: @featured_account.photo, size: 48, classes: "w-12 h-12 mr-2 rounded-full", alt: @featured_account.name %>
+              </a>
+            </div>
+            <div class="grow">
+              <div class="flex justify-between pb-1 text-sm">
+                <div class="">
+                  <span class="font-semibold"><a href="<%= @featured_account.url %>" class="text-gray-900"  target="_blank" rel="noopener"><%= @featured_account.name %></a></span>
+                  <span class="text-gray-800">·</span>
+                  <span class="font-light text-gray-800"><%= local_time(@featured_account.pinned_post.published_at, '%B %e, %Y') %></span>
+                </div>
+                <div>
+                  <%= heroicon "chevron-down", class: "w-4 h-4 text-gray-800 hover:text-accent" %>
+                </div>
+              </div>
+              <div class="max-w-md">
+                <div class="mb-4">
+                  <p class="mb-4">I just published "<%= @featured_account.pinned_post.subject %>" on my website - check it out:</p>
+                  <p class="mb-4">
+                    <a href="<%= @featured_account.pinned_post.url %>" class="text-accent hover:underline" target="_blank" rel="noopener">
+                      <%= @featured_account.pinned_post.url.sub('http://', '').sub('https://', '').truncate(36) %>
+                    </a>
+                  </p>
+                  <a href="<%= @featured_account.pinned_post.url %>" target="_blank" rel="noopener">
+                    <img src="<%= public_post_og_image_url(@featured_account.pinned_post.slug, @featured_account.pinned_post.updated_at.to_i, host: @featured_account.host) %>"
+                      alt="<%= @featured_account.pinned_post.subject %>"
+                      class="w-full h-auto border border-gray-200 border-solid rounded-md shadow-sm"
+                      styled="max-width: 564px" width="564" height="300">
+                  </a>
+                </div>
+                <div class="flex items-center pb-2 space-x-8 text-sm text-gray-800">
+                  <span class="flex items-center">
+                    <%= heroicon "chat-bubble-left", class: "mr-2 w-4 h-4 inline-block" %>
+                    6
+                  </span>
+
+                  <span class="flex items-center">
+                    <%= heroicon "arrow-path-rounded-square", class: "mr-2 w-4 h-4 inline-block" %>
+                    8
+                  </span>
+
+                  <span class="flex items-center">
+                    <%= heroicon "heart", class: "mr-2 w-4 h-4 inline-block" %>
+                    19
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 md:px-0 lg:pt-4 lg:pl-4">
+      <div class="max-w-2xl lg:mx-0 lg:max-w-lg">
+        <h2 class="homepage-label">How it works</h2>
+        <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Write once, share everywhere</p>
+        <dl class="max-w-xl mt-10 space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+          <% steps.each_with_index do |(title, description), index| %>
+            <div class="relative pl-9">
+              <dt class="inline font-semibold text-gray-900">
+                <span class="absolute flex items-center justify-center w-5 h-5 text-xs text-white rounded-full top-1 left-1 bg-accent">
+                  <%= index + 1 %>
+                </span>
+                <%= title %>
+              </dt>
+              <dd class="inline"><%= description %></dd>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>

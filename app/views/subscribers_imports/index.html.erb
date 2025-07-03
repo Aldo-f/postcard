@@ -1,0 +1,26 @@
+<div class="flex items-center justify-between">
+  <div class="flex-grow">
+    <h1 class="dashboard-title">
+      Subscriber imports
+    </h1>
+    <div class="block mt-2 text-sm text-gray-500">
+      Import subscribers from a spreadsheet. Imports are manually reviewed and approved to prevent spam.
+    </div>
+  </div>
+  <%= link_to "New import",
+    new_page_subscribers_import_path(@account),
+    class: "btn btn-primary shrink-0"
+    %>
+</div>
+
+<div class="my-6">
+  <% if @subscribers_imports.count.zero? %>
+    <div class="py-20 font-light text-center text-gray-500 max-w-none">
+      <p>
+        You have not created any subscriber imports yet
+      </p>
+    </div>
+  <% else %>
+    <%= render "table", imports: @subscribers_imports %>
+  <% end %>
+</div>

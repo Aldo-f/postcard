@@ -1,0 +1,24 @@
+<div data-controller="openmodal" data-openmodal-disable-backdrop="true">
+  <!-- Modal Container -->
+  <div
+    data-openmodal-target="container" data-action="click->openmodal#closeBackground keyup@window->openmodal#closeWithKeyboard"
+    class="fixed inset-0 flex items-center justify-center hidden min-h-screen overflow-y-auto animated fadeIn bg-gray-100/70 min-w-screen" style="z-index: 40;">
+    <!-- Modal Inner Container -->
+    <div class="w-full max-w-lg max-h-screen p-4">
+      <!-- Modal Card -->
+      <div class="m-1 bg-white rounded-lg shadow">
+        <div class="p-8">
+          <h2 class="pb-3 text-2xl font-semibold text-center text-gray-925">Share your post:</h2>
+
+          <%= render "shared/share", url: public_post_url(post, domain: post.account.host, protocol: request.protocol), subject: post.subject %>
+
+          <div class="flex justify-center pt-4">
+            <button class="link" data-action="click->openmodal#close">
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="h-full bg-white" lang="en">
+
+<head>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application.tailwind", "data-turbo-track": "reload" %>
+
+  <%# https://github.com/rails/importmap-rails/issues/65 %>
+  <script>
+    window.process = {
+      env: {}
+    }
+  </script>
+  <%= javascript_importmap_tags %>
+  <% if content_for?(:head) %><%= yield(:head) %><% end %>
+
+  <% if Rails.env.production? && Rails.configuration.multiuser_mode && (request.host == Rails.configuration.base_host) %>
+  <script defer data-domain="postcard.page" src="https://telegraph.contraption.co/js/script.outbound-links.js"></script>
+  <script>
+    window.plausible = window.plausible || function() {
+      (window.plausible.q = window.plausible.q || []).push(arguments)
+    }
+  </script>
+
+  <% end %>
+
+  <% if request.host != Rails.configuration.base_host %>
+  <%# fill notch on postcard pages due to cover photo %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    body {
+      padding:
+        env(safe-area-inset-top, 60px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 20x);
+    }
+    }
+  </style>
+  <% else %>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <% end %>
+
+  <%# https://github.com/Studiosity/grover/issues/88 %>
+  <meta charset="UTF-8" />
+
+  <%# Update this when we have dark mode. Also, intentionally choosing background color instead of accent. %>
+  <%# https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color %>
+  <meta name="theme-color" content="#ffffff" />
+
+  <%# RSS %>
+  <% if @account.present? && request.host == @account.host %>
+  <%= auto_discovery_link_tag :rss, public_posts_url(:format => :rss, host: @account.host) %>
+  <% end %>
+
+  <% og_url = @post.present? ? public_post_og_image_url(@post.slug, @post.updated_at.to_i, host: @post.account.host) : (@account.present? ? public_page_og_image_url(@account.updated_at.to_i, host: @account.host) : asset_url("og.jpg")) %>
+  <%=
+    display_meta_tags reverse: true,
+      site: @account.present? ? @account.name : 'Postcard',
+      description: @post.present? ? @post.description : (@account.present? ? @account.description.to_plain_text.split("\n").first : 'Personal websites, reinvented. Postcard is a new way to create and host a personal website. No code or design skills required.'),
+      separator: '-',
+      icon: [
+        { href: (@account&.icon&.attached? && (request.host != Rails.configuration.base_host)) ? cdn_proxy_url(@account.icon) : asset_path('logo/icon.png'), type: 'image/png' },
+        { href: (@account&.icon&.attached? && (request.host != Rails.configuration.base_host)) ? cdn_proxy_url(@account.icon) : asset_path('logo/icon.png'), rel: 'apple-touch-icon-precomposed', type: 'image/png' },
+      ],
+      og: {
+        title: :title,
+        description: :description,
+        type: @post.present? ? 'article' : 'website',
+        url: canonical_url,
+        image: og_url,
+        site_name: @account.present? ? @account.name : 'Postcard',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: :title,
+        description: :description,
+        image: og_url,
+      },
+      canonical: canonical_url
+    %>
+
+  <% if request.host == Rails.configuration.base_host %>
+  <%= javascript_import_module_tag "dashboard" %>
+  <%= stylesheet_link_tag "trix", "actiontext", "data-turbo-track": "reload" %>
+
+  <% end %>
+</head>
+
+<body class="h-full min-h-screen bg-white">
+  <%# Put overrides in body bc of turbolinks %>
+  <%= render :partial => 'layouts/account_accent_color_override', locals: {} %>
+
+  <%= content_for?(:content) ? yield(:content) : yield %>
+
+  <% if current_account.present? && request.host == Rails.configuration.base_host && controller_name != "feedbacks" && !content_for(:hide_feedback) && Rails.configuration.multiuser_mode %>
+  <%= turbo_frame_tag "feedback", class: "fixed bottom-4 right-4 rounded-lg border border-gray-200 bg-gray-050 z-40 shadow-lg hidden lg:block", src: new_feedback_path, data: { 'turbo-permanent': true } %>
+  <% end %>
+  <%= render :partial => 'layouts/flash_messages', locals: { } %>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+Style/Documentation:
+  Enabled: false
+AllCops:
+  NewCops: enable
+  Exclude:
+    - vendor/bundle/**/*
+    - gemfiles/vendor/bundle/**/*
+    - "bin/*"
+    - "db/schema.rb"
+    - "config/sitemap.rb"
+    - "config/initializers/warning.rb"
+    - "config/environments/*"
+    - "db/migrate/20220402162051_add_service_name_to_active_storage_blobs.active_storage.rb"
+    - "db/migrate/20220402162052_create_active_storage_variant_records.active_storage.rb"
+    - "db/migrate/20220406051518_create_ahoy_visits_and_events.rb"
+    - "db/migrate/20230111165728_add_email_count_to_subscribers_import.rb"
+    - "app/views/public_pages/*.builder"
+Metrics/MethodLength:
+  Exclude:
+    - "db/migrate/*"
+Metrics/AbcSize:
+  Exclude:
+    - "db/migrate/*"
+Metrics/ClassLength:
+  Exclude:
+    - "app/models/*"
+Layout/LineLength:
+  Exclude:
+    - "app/dashboards/*"
+    - "db/migrate/*"
+Style/HashSyntax:
+  Exclude:
+    - "**/*"
+Lint/RedundantCopDisableDirective:
+  Exclude:
+    - "db/seeds.rb"
+    - "app/models/summary_message.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "config/routes.rb"
+    - "db/seeds.rb"
+Rails/I18nLocaleTexts:
+  Exclude:
+    - "**/*"

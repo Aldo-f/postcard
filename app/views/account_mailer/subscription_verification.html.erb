@@ -1,0 +1,12 @@
+<% content_for :summary do %>
+  Confirm your subscription to <%= @account.name %>
+<% end %>
+
+
+<% content_for :button_label do %>Confirm subscription &rarr;<% end %>
+
+<% content_for :button_link do %><%= @verification_url %><% end %>
+
+<p>
+  To get email updates from <a href="<%= @account.url %>"><%= @account.name %></a>, please click the button below:
+</p>

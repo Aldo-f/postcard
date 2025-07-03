@@ -1,0 +1,11 @@
+<% content_for :summary do %>
+  Confirm your account email on Postcard
+<% end %>
+
+<p>Welcome to Postcard!</p>
+
+<p>Click below to confirm your email and finish setting up your page:</p>
+
+<% content_for :button_label do %>Confirm account &rarr;<% end %>
+
+<% content_for :button_link do %><%= confirmation_url(@resource, confirmation_token: @token) %><% end %>

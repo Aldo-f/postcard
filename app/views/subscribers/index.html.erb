@@ -1,0 +1,26 @@
+<div class="flex items-center justify-between">
+  <div class="flex-grow">
+    <h1 class="dashboard-title">
+      <%= pluralize(@active_subscriptions.count, 'subscriber') %>
+    </h1>
+    <div class="block mt-2 text-sm text-gray-500">
+      <%= link_to "Export →", page_subscribers_export_path(@account, format: :csv), class: 'text-gray-500 underline text-sm mt-2 block' %>
+    </div>
+  </div>
+  <%= link_to "Import",
+    @account.subscribers_imports.any? ? page_subscribers_imports_path(@account) : new_page_subscribers_import_path(@account),
+    class: "btn btn-secondary shrink-0"
+    %>
+</div>
+
+<div class="my-6">
+  <% if @active_subscriptions.count.zero? %>
+    <div class="prose max-w-none">
+      <p>
+        Nobody has joined your mailing list yet. Try sharing your Postcard page to get some subscribers, or import a list from another service.
+      </p>
+    </div>
+  <% else %>
+    <%= render :partial => "subscribers/table", locals: { subscriptions: @active_subscriptions } %>
+  <% end %>
+</div>

@@ -1,0 +1,26 @@
+<% title 'Design' %>
+
+<% content_for :heading do %>
+  <span class="md:hidden">Design</span>
+  <span class="hidden md:inline">Design your page</span>
+<% end %>
+
+<% content_for :left do %>
+<% end %>
+
+<% content_for :right do %>
+  <%= render :partial => "shared/primary_button_loading",
+    locals: {
+      label: 'Preview',
+      arrow: true,
+      classes: 'btn-responsive',
+      form: "design_form"
+    }
+  %>
+<% end %>
+
+<div class="public-page-container">
+  <div class="my-6">
+    <%= render 'pages/design_form', account: @account %>
+  </div>
+</div>

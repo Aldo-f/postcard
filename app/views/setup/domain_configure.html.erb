@@ -1,0 +1,34 @@
+<% title 'Configure domain' %>
+
+<%
+calendly_url = "https://calendly.com/philipithomas/30m-call?name=#{CGI.escape(@account.name)}&email=#{CGI.escape(@account.email)}&a1=#{CGI.escape("Help set up my Postcard custom domain for " + @account.host(show_unverified: true))}"
+%>
+
+<% content_for :heading do %>
+  Configure your domain
+<% end %>
+
+<div class="prose">
+  <p>
+    Sign into your domain provider
+    <% if @registrar&.name && @registrar&.url %>
+      <a href="<%= @registrar.url %>" target="_blank" rel="noopener"><%= @registrar.name %></a>
+    <% end %>
+   and set these DNS values for <span class="record"><%= @account.host(show_unverified: true) %></span>:</p>
+</div>
+
+<%= render "domain_record_table" %>
+
+<div class="prose">
+  <p>Want help? <a href="<%= calendly_url %>" class="link" target="_blank" rel="noopener">Schedule a setup call</a> 😀</p>
+</div>
+
+<%= link_to 'Finished adding the records →', next_wizard_path, class: 'btn btn-primary w-full', data: (@account.active_subscription? ? nil : {'turbo': false, action: 'click->upgrade#open'}) %>
+
+<p class="text-gray-700 text-center text-sm">
+  <div class="text-center">
+    <%= link_to "Do this later", page_path(@account), class: 'link' %>
+    or
+    <%= link_to "Cancel and start over", request.path, class: 'link', data: { 'turbo-method': :put }  %>
+  </div>
+</p>

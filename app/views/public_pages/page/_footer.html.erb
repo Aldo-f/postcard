@@ -1,0 +1,19 @@
+<footer class="public-page-container">
+  <p class="mt-0 text-xs text-gray-700 text-center">
+    <%
+      params = {:utm_campaign => "Made with Postcard", :utm_source => URI.parse(request.url).host}
+    %>
+
+    Made with <%= link_to "Postcard",
+      "https://postcard.page/?#{params.to_query}",
+      class: "underline" %>.
+
+    <%# Determine the sign-in URL depending on application mode %>
+    <% sign_in_url = if Rails.configuration.solo_mode
+      current_account.present?  ? page_path(current_account) : "/accounts"
+    else
+      Rails.env.production? ? "https://#{Rails.configuration.base_host}/accounts" : "http://#{Rails.configuration.base_host}:3000/accounts"
+    end %>
+    <%= link_to "Sign in →", sign_in_url, class: "underline" %>
+  </p>
+</footer>

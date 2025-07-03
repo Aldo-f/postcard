@@ -1,0 +1,23 @@
+<% title 'Unsubscribe' %>
+
+<div class="container flex flex-col items-center justify-center h-screen">
+  <div class="w-full prose text-center max-w-none">
+    <h1 class="dashboard-title">
+      <% if @email_message.subscription&.account %>
+        Don't want emails any more from
+        <%=
+          link_to @email_message.subscription.account.name,
+          @email_message.subscription.account.url,
+          target: "_blank", class: 'link' %>?
+      <% else %>
+        Don't want these emails any more?
+      <% end %>
+    </h1>
+  </div>
+
+  <div class="pt-6">
+    <%= link_to 'Unsubscribe', request.path,
+      data: {turbo_method: :delete },
+      class: 'btn btn-primary' %>
+  </div>
+</div>

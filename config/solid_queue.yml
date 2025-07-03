@@ -1,0 +1,31 @@
+default: &default
+  dispatchers:
+    - polling_interval: 1
+      batch_size: 500
+      recurring_tasks:
+        verify_domains:
+          class: VerifyDomainsJob
+          schedule: every 1 minute
+        enqueue_analytics_summary_emails:
+          class: EnqueueAnalyticsSummaryEmailsJob
+          schedule: "0 0 10 * * * America/New_York"
+        visits_in_last_day:
+          class: VisitsInLastDayJob
+          schedule: "0 8 * * * America/Los_Angeles"
+        telemetry:
+          class: TelemetryJob
+          schedule: every 1 hour
+  workers:
+    - queues: "*"
+      threads: 1
+      processes: 2
+      polling_interval: 1
+
+development:
+ <<: *default
+
+test:
+ <<: *default
+
+production:
+ <<: *default

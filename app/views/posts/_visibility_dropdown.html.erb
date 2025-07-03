@@ -1,0 +1,35 @@
+<div class="relative inline-block text-left" data-controller="dropdown">
+  <div>
+    <button
+      type="button"
+      class="btn btn-small w-24 <% if post.visibility_public? %>btn-primary<% end %> <% if post.visibility_unlisted? %>btn-secondary<% end %><% if post.visibility_hidden? %>btn-tertiary<% end %>"
+      id="post-visibility-<%= post.id %>"
+      aria-expanded="true"
+      data-action="dropdown#toggle click@window->dropdown#hide"
+      aria-haspopup="true">
+      <div class="flex justify-between w-full">
+        <%= post.visibility.titleize %>
+        <%= heroicon 'chevron-down', class: 'w-5 h-5 ml-2 -mr-1', variant: :mini %>
+      </div>
+    </button>
+  </div>
+  <div
+    data-dropdown-target="menu"
+    data-transition-enter-from="opacity-0 scale-95"
+    data-transition-enter-to="opacity-100 scale-100"
+    data-transition-leave-from="opacity-100 scale-100"
+    data-transition-leave-to="opacity-0 scale-95"
+    class="absolute right-0 hidden transition duration-200 ease-in-out origin-top-right transform dropdown-menu focus:outline-none"
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="post-visibility-<%= post.id %>"
+    tabindex="-1">
+
+    <% Post.visibilities.each_key do |visibility| %>
+      <%= form_with(model: post, url: page_post_path(account, post), method: :put, local: true,  class: 'dropdown-menu-item', role: 'menuitem') do |f| %>
+        <%= f.hidden_field :visibility, value: visibility %>
+        <%= f.submit visibility.titleize, class: 'w-full text-left cursor-pointer' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

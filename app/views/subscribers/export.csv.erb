@@ -1,0 +1,5 @@
+<%- headers = ['Email', 'Verified at', 'Unsubscribed at', 'Source'] -%>
+<%= CSV.generate_line headers %>
+<%- @account.subscriptions.export.all.each do |subscription| -%>
+  <%= CSV.generate_line([subscription.email_address.email, subscription.verified_at, subscription.unsubscribed_at, subscription.source]) -%>
+<%- end -%>

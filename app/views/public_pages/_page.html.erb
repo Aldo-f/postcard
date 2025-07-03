@@ -1,0 +1,30 @@
+<%
+simple_mode = defined?(:simple_mode) ? simple_mode : false
+%>
+
+<div class="flex flex-col w-full min-h-screen bg-white">
+  <div class="flex-grow">
+    <div>
+      <%= render "public_pages/page/cover", picture: account.cover, alt: "Cover photo for #{account.name}", classes: "h-36 lg:h-60", simple_mode: simple_mode %>
+    </div>
+    <!-- Body -->
+    <%= render :partial => 'public_pages/page/profile_photo', locals: {account: account} %>
+    <%= render :partial => 'public_pages/page/title', locals: {title: account.name} %>
+    <%= render :partial => 'public_pages/page/body', locals: {body: account.description} %>
+  </div>
+
+  <div>
+    <div class="w-full py-12 mt-12 bg-gray-050">
+      <% if account.pinned_post.present? %>
+        <div class="pb-12 public-page-container">
+          <%= render :partial => 'shared/post_card', locals: { post: account.pinned_post } %>
+        </div>
+      <% end %>
+
+      <%= render :partial => 'public_pages/page/subscribe', locals: {account: account, disabled: disabled} %>
+    </div>
+    <div class="w-full py-8 bg-opacity-75 bg-gray-075">
+      <%= render :partial => 'public_pages/page/footer', locals: {account: account} %>
+    </div>
+  </div>
+</div>

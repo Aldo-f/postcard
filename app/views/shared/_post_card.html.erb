@@ -1,0 +1,29 @@
+<a class="flex flex-col overflow-hidden rounded-lg shadow-lg" href="<%= public_post_url(post, domain: post.account.host, protocol: request.protocol) %>">
+  <div class="flex flex-col justify-between flex-1 p-6 bg-white">
+    <div class="flex-1">
+      <% if post.account.posts.published.first == post %>
+        <div class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-gray-075 text-gray-950 mb-3">New</div>
+      <% end %>
+      <div class="block">
+        <p class="text-xl font-semibold text-gray-900"><%= post.subject %></p>
+        <div class="mt-3 mb-2 text-xs font-light text-gray-700">
+          <%= local_time(post.published_at.present? ? post.published_at : post.updated_at, '%B %e, %Y') %>
+        </div>
+        <%
+          trimmed_body = post.body.to_plain_text.sub(/\s*\[.+\]$/m, '')
+          print_inline = trimmed_body&.lines.count.send(:<, 4)
+        %>
+        <div class="line-clamp-3" <% if print_inline %> style="white-space: pre-line;" <% end %>
+          ><%=
+            if trimmed_body.lines.count > 3
+              trimmed_body.gsub("\n", ' ')
+            else
+              trimmed_body
+            end
+          %>
+        </div>
+        <div class="mt-4 text-accent-if-contrast hover:underline">Read more →</div>
+      </div>
+    </div>
+  </div>
+</a>

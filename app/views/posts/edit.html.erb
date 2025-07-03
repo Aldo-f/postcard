@@ -1,0 +1,22 @@
+<% content_for :top_nav do %>
+  <div class="flex items-center justify-between h-full dashboard-container">
+    <div class="flex-grow">
+    </div>
+    <div class="space-x-4 shrink-0 btn-group">
+      <%= link_to "Cancel", page_posts_path(@account), class: "link" %>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        form="post-<%= @post.id %>"
+        name="redirect"
+        value="true"
+        >
+        Publish
+        <%= render :partial => "shared/button_loading_arrow" %>
+      </button>
+    </div>
+  </div>
+<% end %>
+
+<%= render "posts/form", post: @post %>

@@ -1,0 +1,33 @@
+<% title 'Preview' %>
+
+<% content_for :heading do %>
+    <span class="hidden md:inline">Preview your website</span>
+    <span class="md:hidden">Preview</span>
+<% end %>
+
+<% content_for :left do %>
+  <a href="<%= previous_wizard_path %>" class="btn btn-secondary btn-responsive">
+    ← Back
+  </a>
+<% end %>
+
+<% content_for :right do %>
+  <a href="<%= next_wizard_path %>" class="btn btn-primary btn-responsive space-x-1">
+    <span class="hidden md:inline">Next: Publish →</span>
+    <span class="md:hidden">Publish →</span>
+  </a>
+<% end %>
+
+<%# Click shield %>
+<div class="h-screen w-screen fixed z-30"></div>
+
+<% content_for :hide_feedback do %>!<% end %>
+
+<%= render :partial => "public_pages/page", locals: {account: @account, disabled: true, simple_mode: true} %>
+
+<div class="w-full fixed bottom-6 flex justify-center">
+  <div class=" rounded-full border border-gray-200 font-medium bg-gray-050 z-40 shadow-lg px-4 py-2 text-xs text-gray-925 flex items-center space-x-1">
+    <%= heroicon "eye-slash", class: "h-3 w-3" %>
+    <span>Links disabled in preview</span>
+  </div>
+</div>

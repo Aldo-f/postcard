@@ -1,0 +1,9 @@
+<% if Rails.env.production? %>
+User-Agent: *
+Allow: /
+Disallow: /unsubscribe/
+Sitemap: <%= @sitemap_url %>
+<% else %>
+User-Agent: *
+Disallow: /
+<% end %>
