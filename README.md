@@ -200,6 +200,12 @@ AWS_STORAGE_BUCKET=your-bucket-name
 DEFAULT_EMAIL_REPLY_TO=your-verified-email@yourdomain.com
 ```
 
+## Production hosting
+
+Postcard includes a Dockerfile for easy deployment.
+
+It also includes a `render.yaml` for managed hosting on [Render](https://render.com). To host there, just connect this repo to your account and use the "Blueprint" functionality, paste in the AWS and hCaptcha keys, and the entire app will run with no further configuration.
+
 ## Multi-User Mode
 
 This is the exact same repository that powers [postcard.page](https://postcard.page), which hosts multiple user accounts and personal websites. The hosted service at postcard.page runs in multi-user mode, allowing multiple users to create accounts and build their own personal websites.
