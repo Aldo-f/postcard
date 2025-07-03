@@ -15,12 +15,12 @@ class MarketingPagesController < ApplicationController
 
   SECONDARY_SHOWCASED_PAGE_SLUGS = %w[
     kaley-wendorf
-    harry-moy
     mairin
+    lily-wang
 
     david-hagan
-    sabrina-chow
     joedaft
+    jj
   ].freeze
 
   TERTIARY_SHOWCASED_PAGE_SLUGS = %w[
