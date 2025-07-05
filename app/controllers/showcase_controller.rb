@@ -28,6 +28,7 @@ class ShowcaseController < ApplicationController
     doug-mellon
     lindsaycrouse
     joedaft
+    andria-tomlin
   ].freeze
 
   def index
