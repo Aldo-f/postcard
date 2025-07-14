@@ -24,7 +24,7 @@ simple_mode = defined?(:simple_mode) ? simple_mode : false
       <%= render :partial => 'public_pages/page/subscribe', locals: {account: account, disabled: disabled} %>
     </div>
     <div class="w-full py-8 bg-opacity-75 bg-gray-075">
-      <%= render :partial => 'public_pages/page/footer', locals: {account: account} %>
+      <%= render_theme_partial 'public_pages/page/footer', locals: {account: account} %>
     </div>
   </div>
 </div>

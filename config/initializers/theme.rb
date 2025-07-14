@@ -1,0 +1,1 @@
+Rails.configuration.theme_name = "default"

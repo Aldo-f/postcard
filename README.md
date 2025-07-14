@@ -47,21 +47,21 @@ For production, you'll need to set up [AWS](https://aws.amazon.com/) for email s
 
 Here's a list of all available environment variables for solo mode:
 
-| Variable                 | Default                                     | Description                                                |
-|--------------------------|---------------------------------------------|---------------------------------------------------------------|
-| BASE_HOST                | localtest.me (dev) / postcard.page (prod)   | The domain for your Postcard installation. In multiuser mode, subdomains become public account pages. |
-| SECRET_KEY_BASE          | null                                        | Used by Rails for session cookies and other cryptographic operations. Should be a long, random string kept secret. |
-| DEFAULT_EMAIL_FROM       | hello@postcard.page                         | Default from email address for all outgoing emails. This is the address that appears as the sender in recipients' inboxes. |
-| DEFAULT_EMAIL_FROM_NAME  | Postcard                                    | Default from name that appears alongside the from email address. This is the display name recipients see as the sender. |
-| AWS_ACCESS_KEY_ID        | null                                        | AWS credential for accessing S3 storage. Required in production for storing user uploads like profile photos and attachments. |
-| AWS_SECRET_ACCESS_KEY    | null                                        | AWS credential paired with the access key ID. Both are required to authenticate with AWS services. |
-| AWS_REGION               | us-east-1                                   | AWS region where your S3 bucket is located. Different regions may offer better performance depending on your users' locations. |
-| AWS_STORAGE_BUCKET       | null                                        | Name of the S3 bucket where files will be stored. This bucket must exist and be configured with proper permissions. |
-| HCAPTCHA_SITE_KEY        | null                                        | Public key for hCaptcha bot protection. Used on forms to prevent spam and abuse. |
-| HCAPTCHA_SECRET_KEY      | null                                        | Private key for hCaptcha verification. Used server-side to validate captcha responses. |
-| GOOGLE_OAUTH_CLIENT_ID   | null                                        | Google OAuth credentials for enabling "Sign in with Google" functionality. Required if you want to allow Google login. |
-| GOOGLE_OAUTH_CLIENT_SECRET| null                                        | Secret key paired with the Google OAuth client ID. Both are required for Google authentication to work. |
-| DISABLE_ANONYMOUS_TELEMETRY | false                                     | Set to true to opt out of anonymous telemetry. See section below for details. |
+| Variable                    | Default                                   | Description                                                                                                                    |
+| --------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| BASE_HOST                   | localtest.me (dev) / postcard.page (prod) | The domain for your Postcard installation. In multiuser mode, subdomains become public account pages.                          |
+| SECRET_KEY_BASE             | null                                      | Used by Rails for session cookies and other cryptographic operations. Should be a long, random string kept secret.             |
+| DEFAULT_EMAIL_FROM          | hello@postcard.page                       | Default from email address for all outgoing emails. This is the address that appears as the sender in recipients' inboxes.     |
+| DEFAULT_EMAIL_FROM_NAME     | Postcard                                  | Default from name that appears alongside the from email address. This is the display name recipients see as the sender.        |
+| AWS_ACCESS_KEY_ID           | null                                      | AWS credential for accessing S3 storage. Required in production for storing user uploads like profile photos and attachments.  |
+| AWS_SECRET_ACCESS_KEY       | null                                      | AWS credential paired with the access key ID. Both are required to authenticate with AWS services.                             |
+| AWS_REGION                  | us-east-1                                 | AWS region where your S3 bucket is located. Different regions may offer better performance depending on your users' locations. |
+| AWS_STORAGE_BUCKET          | null                                      | Name of the S3 bucket where files will be stored. This bucket must exist and be configured with proper permissions.            |
+| HCAPTCHA_SITE_KEY           | null                                      | Public key for hCaptcha bot protection. Used on forms to prevent spam and abuse.                                               |
+| HCAPTCHA_SECRET_KEY         | null                                      | Private key for hCaptcha verification. Used server-side to validate captcha responses.                                         |
+| GOOGLE_OAUTH_CLIENT_ID      | null                                      | Google OAuth credentials for enabling "Sign in with Google" functionality. Required if you want to allow Google login.         |
+| GOOGLE_OAUTH_CLIENT_SECRET  | null                                      | Secret key paired with the Google OAuth client ID. Both are required for Google authentication to work.                        |
+| DISABLE_ANONYMOUS_TELEMETRY | false                                     | Set to true to opt out of anonymous telemetry. See section below for details.                                                  |
 
 ### Anonymous Telemetry
 
